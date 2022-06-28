@@ -73,7 +73,8 @@ class LoginScreen extends StatelessWidget {
                 SubmitButton(
                   buttonText: 'SIGN IN',
                   onPressed: () {
-                    Navigator.pushNamed(context, ProductsListScreen.routeName);
+                    Navigator.of(context)
+                        .pushNamed(ProductsListScreen.routeName);
                   },
                 ),
               ],
