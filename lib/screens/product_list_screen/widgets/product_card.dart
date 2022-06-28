@@ -1,4 +1,4 @@
-import 'package:firebase_testv2/constants/k_constants.dart';
+import 'package:firebase_testv2/constants/constants.dart';
 import 'package:firebase_testv2/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +37,7 @@ class ProductCard extends StatelessWidget {
                             children: [
                               Text(
                                 product.id ?? '',
-                                style: KProductCard.titleStyle,
+                                style: CardConstants.titleStyle,
                               ),
                             ],
                           ),
@@ -50,7 +50,7 @@ class ProductCard extends StatelessWidget {
                               Text(
                                 product.price.toString(),
                                 style: TextStyle(
-                                  color: KApp.primaryColor,
+                                  color: ColorConstants.primaryColor,
                                   fontSize: 17,
                                   fontWeight: FontWeight.w400,
                                 ),

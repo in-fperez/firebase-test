@@ -1,4 +1,5 @@
-import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
+import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
+import 'package:firebase_testv2/theme/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -9,25 +10,20 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const IcemanApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+class IcemanApp extends StatelessWidget {
+  const IcemanApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     AppRouter appRouter = AppRouter();
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Warehouse',
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-        useMaterial3: true,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        colorScheme: const ColorScheme.light().copyWith(primary: Colors.red),
-      ),
-      initialRoute: ProductsListScreen.routeName,
+      title: 'Iceman App',
+      theme: Themes.getLight(),
+      darkTheme: Themes.getDark(),
+      themeMode: ThemeMode.dark,
+      initialRoute: LoginScreen.routeName,
       onGenerateRoute: appRouter.onGenerateRoute,
     );
   }

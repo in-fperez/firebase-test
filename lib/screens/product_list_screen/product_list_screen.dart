@@ -35,13 +35,10 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             children: [
               Expanded(
                 child: Center(
-                  child: ListView(
-                    children: state.products
-                        .map((product) => ProductCard(
-                              product: product,
-                            ))
-                        .toList(),
-                  ),
+                  child: ListView.builder(
+                      itemCount: state.products.length,
+                      itemBuilder: (context, index) =>
+                          ProductCard(product: state.products[index])),
                 ),
               )
             ],
