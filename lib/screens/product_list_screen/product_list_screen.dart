@@ -1,9 +1,12 @@
 import 'package:firebase_testv2/cubit/product_list/product_list_cubit.dart';
+import 'package:firebase_testv2/screens/global_widgets/lateral_menu.dart';
 import 'package:firebase_testv2/screens/product_list_screen/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/constants.dart';
+import '../global_widgets/bottom_navigation_bar.dart';
+import '../global_widgets/dropdown_button.dart';
 
 class ProductsListScreen extends StatefulWidget {
   const ProductsListScreen({Key? key}) : super(key: key);
@@ -29,25 +32,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       appBar: AppBar(
         title: const Text("Listing"),
       ),
-      drawer: SizedBox(
-        width: MediaQuery.of(context).size.width / 2,
-        child: Drawer(
-          backgroundColor: ColorConstants.secondaryColor,
-          child: ListView(
-            // padding: const EdgeInsets.symmetric(vertical: ),
-            children: const <Widget>[
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
-              ),
-              ListTile(
-                leading: Icon(Icons.logout),
-                title: Text('Log Out'),
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: LateralMenu(),
       body: BlocBuilder<ProductsListCubit, ProductListState>(
         builder: ((context, state) {
           return Column(
@@ -58,87 +43,23 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: Container(
-                        decoration:
-                            BoxDecoration(color: ColorConstants.secondaryColor),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                            hint: const Padding(
-                              padding: EdgeInsets.fromLTRB(10, 8.5, 59, 8.5),
-                              child: Text(
-                                "Filtro",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  letterSpacing: 0.25,
-                                ),
-                              ),
-                            ),
-                            items: <String>[
-                              'TODAS',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    letterSpacing: 0.15,
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {},
-                          ),
-                        ),
-                      ),
+                    padding: EdgeInsets.all(12.0),
+                    child: CustomDropdownButton(
+                      hintText: "Filtro",
+                      itemOptions: ["TODAS"],
+                      functionOnchange: (String? string) {},
                     ),
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: Container(
-                      decoration:
-                          BoxDecoration(color: ColorConstants.secondaryColor),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                          hint: const Padding(
-                            padding: EdgeInsets.fromLTRB(10, 8.5, 0, 8.5),
-                            child: Text(
-                              "Ordenación",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                letterSpacing: 0.25,
-                              ),
-                            ),
-                          ),
-                          items: <String>[
-                            'Fecha (antiguo primero)',
-                            'Fecha (nuevo primero)',
-                            'Novedades',
-                            'Personalizado'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  letterSpacing: 0.15,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {},
-                        ),
-                      ),
-                    ),
-                  ),
+                  CustomDropdownButton(
+                    hintText: "Ordenación",
+                    itemOptions: [
+                      'Fecha (antiguo primero)',
+                      'Fecha (nuevo primero)',
+                      'Novedades',
+                      'Personalizado'
+                    ],
+                    functionOnchange: (String? string) {},
+                  )
                 ],
               ),
               Container(
@@ -207,14 +128,24 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                 child: Center(
                   child: ListView.builder(
                     itemCount: state.products.length,
-                    itemBuilder: (context, index) =>
+                    itemBuilder: (context, index) => Column(
+                      children: [
                         ProductCard(product: state.products[index]),
+                        Divider(
+                          height: 1,
+                          color: ColorConstants.secondaryColor,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               )
             ],
           );
         }),
+      ),
+      bottomNavigationBar: const CustomBottomBar(
+        actualIndex: 0,
       ),
     );
   }

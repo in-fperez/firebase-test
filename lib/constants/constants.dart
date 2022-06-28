@@ -4,6 +4,7 @@ class ColorConstants {
   // static MaterialColor primaryColor = const MaterialColor(#1C1B1F)
   static Color primaryColor = Colors.black;
   static Color secondaryColor = const Color(0xff272727);
+  static Color ternaryColor = const Color(0xff979797);
   static Color accentColor = const Color.fromRGBO(255, 159, 45, 1);
 }
 

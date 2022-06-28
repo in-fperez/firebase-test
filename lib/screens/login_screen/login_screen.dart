@@ -1,6 +1,7 @@
 import 'package:firebase_testv2/constants/constants.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/custom_text_field.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/submit_button.dart';
+import 'package:firebase_testv2/screens/options_screen/options_screen.dart';
 import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,22 +21,13 @@ class LoginScreen extends StatelessWidget {
           backgroundColor: ColorConstants.secondaryColor,
           child: ListView(
             // padding: const EdgeInsets.symmetric(vertical: ),
-            children: const <Widget>[
-              ListTile(
-                leading: Icon(Icons.message),
-                title: Text('Messages'),
-              ),
-              ListTile(
-                leading: Icon(Icons.account_circle),
-                title: Text('Profile'),
-              ),
+            children: <Widget>[
               ListTile(
                 leading: Icon(Icons.settings),
                 title: Text('Settings'),
-              ),
-              ListTile(
-                leading: Icon(Icons.logout),
-                title: Text('Log Out'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(OptionsScreen.routeName);
+                },
               ),
             ],
           ),

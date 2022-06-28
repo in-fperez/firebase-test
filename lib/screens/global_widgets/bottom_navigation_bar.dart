@@ -1,36 +1,39 @@
 import 'package:firebase_testv2/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-class BottomBar extends StatelessWidget {
-  const BottomBar({Key? key, required this.hintText, this.suffixIcon})
+class CustomBottomBar extends StatelessWidget {
+  const CustomBottomBar({Key? key, required this.actualIndex})
       : super(key: key);
-  final String hintText;
-  final Icon? suffixIcon;
+  final int actualIndex;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.horizontal(
-        left: Radius.circular(4),
-        right: Radius.circular(4),
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-          enabledBorder: InputBorder.none,
-          filled: true,
-          fillColor: const Color(0xff2F2F2F),
-          hintStyle: TextStyle(color: ColorConstants.secondaryColor),
-          label: Text(
-            hintText,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 16,
-              letterSpacing: 0.15,
-            ),
-          ),
-          suffixIcon: suffixIcon,
+    return BottomNavigationBar(
+      selectedItemColor: ColorConstants.accentColor,
+      unselectedItemColor: Colors.white,
+      currentIndex: actualIndex,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.menu_sharp),
+          label: "List",
+          backgroundColor: ColorConstants.secondaryColor,
         ),
-      ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.insert_drive_file_outlined),
+          label: "File",
+          backgroundColor: ColorConstants.secondaryColor,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: "Search",
+          backgroundColor: ColorConstants.secondaryColor,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.qr_code_scanner),
+          label: "Scan",
+          backgroundColor: ColorConstants.secondaryColor,
+        ),
+      ],
     );
   }
 }
