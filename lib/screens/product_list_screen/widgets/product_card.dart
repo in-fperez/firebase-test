@@ -10,25 +10,28 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 6),
+      margin: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            this.product.id.toString(),
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-              letterSpacing: 0.15,
+          SizedBox(
+            width: 100,
+            child: Text(
+              product.id.toString(),
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+                fontSize: 12,
+                letterSpacing: 0.15,
+              ),
             ),
           ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40),
-              color: Color(0xff3e9a41),
+              color: const Color(0xff3e9a41),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
             child: const Text(
               "VIL",
               style: TextStyle(

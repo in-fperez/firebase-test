@@ -32,27 +32,26 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       appBar: AppBar(
         title: const Text("Listing"),
       ),
-      drawer: LateralMenu(),
+      drawer: const LateralMenu(),
       body: BlocBuilder<ProductsListCubit, ProductListState>(
         builder: ((context, state) {
           return Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: CustomDropdownButton(
                       hintText: "Filtro",
-                      itemOptions: ["TODAS"],
+                      itemOptions: const ["Filtro", "TODAS"],
                       functionOnchange: (String? string) {},
                     ),
                   ),
                   CustomDropdownButton(
                     hintText: "Ordenación",
-                    itemOptions: [
+                    itemOptions: const [
+                      "Ordenación",
                       'Fecha (antiguo primero)',
                       'Fecha (nuevo primero)',
                       'Novedades',
