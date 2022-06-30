@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class Themes {
   static ThemeData getDark() {
     return ThemeData(
+      useMaterial3: true,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       fontFamily: 'Roboto',
       buttonTheme: ButtonThemeData(
@@ -26,6 +27,7 @@ class Themes {
 
   static ThemeData getLight() {
     return ThemeData(
+      useMaterial3: true,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       fontFamily: 'Roboto',
       primarySwatch: Colors.red,
