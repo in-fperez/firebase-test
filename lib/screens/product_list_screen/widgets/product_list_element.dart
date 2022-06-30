@@ -3,10 +3,10 @@ import 'package:firebase_testv2/models/product.dart';
 import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:flutter/material.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductListElement extends StatelessWidget {
   final Product product;
 
-  const ProductCard({required this.product});
+  const ProductListElement({required this.product});
 
   @override
   Widget build(BuildContext context) {
