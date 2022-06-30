@@ -9,10 +9,8 @@ class ProductListState {
     this.isLoading = false,
   });
 
-  ProductListState copyWith({
-    List<Product>? products,
-    bool? isLoading,
-  }) {
+  ProductListState copyWith(
+      {List<Product>? products, bool? isLoading, String? orderDropdownValue}) {
     return ProductListState(
       products: products ?? this.products,
       isLoading: isLoading ?? this.isLoading,

@@ -1,5 +1,6 @@
 import 'package:firebase_testv2/constants/constants.dart';
 import 'package:firebase_testv2/models/product.dart';
+import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -26,21 +27,8 @@ class ProductCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
-              color: const Color(0xff3e9a41),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-            child: const Text(
-              "VIL",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 12,
-                letterSpacing: 0.25,
-              ),
-            ),
+          CustomWarehousePill(
+            warehouseName: 'VIL',
           ),
           const Text(
             "26-01-2002",
