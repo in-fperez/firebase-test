@@ -19,7 +19,7 @@ class OptionsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(35, 18, 0, 16),
+            margin: const EdgeInsets.fromLTRB(35, 18, 0, 16),
             child: Text(
               "Avisos",
               style: TextStyle(
@@ -35,7 +35,7 @@ class OptionsScreen extends StatelessWidget {
             color: ColorConstants.secondaryColor,
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(35, 28, 0, 20),
+            margin: const EdgeInsets.fromLTRB(35, 28, 0, 20),
             child: Text(
               "Vertical",
               style: TextStyle(
@@ -47,11 +47,11 @@ class OptionsScreen extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 15, bottom: 24),
+            margin: const EdgeInsets.only(left: 15, bottom: 24),
             child: Column(
               children: [
                 ListTile(
-                  title: Text("SKLUM"),
+                  title: const Text("SKLUM"),
                   leading: Radio(
                     value: "SKLUM",
                     onChanged: (String? string) {},
@@ -59,7 +59,7 @@ class OptionsScreen extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text("CREATE"),
+                  title: const Text("CREATE"),
                   leading: Radio(
                     value: "CREATE",
                     onChanged: (String? string) {},
@@ -67,7 +67,7 @@ class OptionsScreen extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text("THE MASIE"),
+                  title: const Text("THE MASIE"),
                   leading: Radio(
                     value: "THE MASIE",
                     onChanged: (String? string) {},
@@ -82,7 +82,7 @@ class OptionsScreen extends StatelessWidget {
             color: ColorConstants.secondaryColor,
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(35, 26, 0, 20),
+            margin: const EdgeInsets.fromLTRB(35, 26, 0, 20),
             child: Text(
               "Almacén",
               style: TextStyle(
@@ -94,11 +94,11 @@ class OptionsScreen extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(left: 15, bottom: 30),
+            margin: const EdgeInsets.only(left: 15, bottom: 30),
             child: Column(
               children: [
                 ListTile(
-                  title: Text("ALM"),
+                  title: const Text("ALM"),
                   leading: Radio(
                     value: "ALM",
                     onChanged: (String? string) {},
@@ -106,7 +106,7 @@ class OptionsScreen extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text("VIL"),
+                  title: const Text("VIL"),
                   leading: Radio(
                     value: "VIL",
                     onChanged: (String? string) {},
@@ -114,7 +114,7 @@ class OptionsScreen extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text("REA"),
+                  title: const Text("REA"),
                   leading: Radio(
                     value: "REA",
                     onChanged: (String? string) {},
@@ -122,7 +122,7 @@ class OptionsScreen extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text("MON"),
+                  title: const Text("MON"),
                   leading: Radio(
                     value: "MON",
                     onChanged: (String? string) {},
@@ -130,7 +130,7 @@ class OptionsScreen extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text("VE1"),
+                  title: const Text("VE1"),
                   leading: Radio(
                     value: "VE1",
                     onChanged: (String? string) {},
@@ -148,7 +148,7 @@ class OptionsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(36, 20, 0, 21),
+                margin: const EdgeInsets.fromLTRB(36, 20, 0, 21),
                 child: Text(
                   "Dark mode",
                   style: TextStyle(
@@ -161,7 +161,7 @@ class OptionsScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 25, 28, 22),
+                margin: const EdgeInsets.fromLTRB(0, 25, 28, 22),
                 child: Switch(
                   activeColor: ColorConstants.accentColor,
                   value: true,

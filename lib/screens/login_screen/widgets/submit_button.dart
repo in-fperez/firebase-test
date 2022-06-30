@@ -26,7 +26,7 @@ class SubmitButton extends StatelessWidget {
               buttonText,
               style: TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w800,
                 letterSpacing: 1.25,
                 color: ColorConstants.primaryColor,
               ),
