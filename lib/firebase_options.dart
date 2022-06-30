@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,31 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBxMou97o9UeliQxjRxPp3J-H8rS4luEEU',
-    appId: '1:168666715608:web:eacace7f3843c04264cead',
-    messagingSenderId: '168666715608',
-    projectId: 'iceman-test-edb49',
-    authDomain: 'iceman-test-edb49.firebaseapp.com',
-    storageBucket: 'iceman-test-edb49.appspot.com',
-    measurementId: 'G-ZPZSCCDXGJ',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBEV92rzGGvhYC-FyCxENMcaWQ7_4imqSs',
-    appId: '1:168666715608:android:031737e8f235231364cead',
-    messagingSenderId: '168666715608',
-    projectId: 'iceman-test-edb49',
-    storageBucket: 'iceman-test-edb49.appspot.com',
+    apiKey: 'AIzaSyDkwWKvaD1hYbkPOCb7SgPge58yAUdU4-U',
+    appId: '1:950297236565:android:c2336125d17d650aeff0dc',
+    messagingSenderId: '950297236565',
+    projectId: 'fir-test-652cc',
+    storageBucket: 'fir-test-652cc.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBbUvQznZFFExsRrA3YJYNdoh47D1ZRUmY',
-    appId: '1:168666715608:ios:4baac4962c8c93f864cead',
-    messagingSenderId: '168666715608',
-    projectId: 'iceman-test-edb49',
-    storageBucket: 'iceman-test-edb49.appspot.com',
-    iosClientId: '168666715608-n5olai30ki3lh3n2qg4utfh7pk2vh40i.apps.googleusercontent.com',
-    iosBundleId: 'com.example.firebaseTest',
+    apiKey: 'AIzaSyCRHdPgu4CqNzBX0-efHMC-z125jc2kkHs',
+    appId: '1:950297236565:ios:7d79402f191c2abaeff0dc',
+    messagingSenderId: '950297236565',
+    projectId: 'fir-test-652cc',
+    storageBucket: 'fir-test-652cc.appspot.com',
+    iosClientId: '950297236565-jghaeblt3315horpa9vpks0iprjt99o0.apps.googleusercontent.com',
+    iosBundleId: 'com.example.firebaseTestv2',
   );
 }
