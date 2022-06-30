@@ -1,7 +1,6 @@
 import 'package:firebase_testv2/cubit/product_list/product_list_cubit.dart';
 import 'package:firebase_testv2/screens/global_widgets/lateral_menu.dart';
 import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_card.dart';
-import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_element.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

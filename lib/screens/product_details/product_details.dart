@@ -1,14 +1,14 @@
+import 'package:firebase_testv2/models/product.dart';
 import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
-import 'package:firebase_testv2/screens/login_screen/widgets/custom_text_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({Key? key}) : super(key: key);
+  const ProductDetailsScreen({Key? key, required this.product})
+      : super(key: key);
   static const routeName = '/product_details';
-
+  final Product product;
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
@@ -36,13 +36,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
               flex: 3,
               child: Column(
                 children: [
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 16, bottom: 7),
+                      padding: const EdgeInsets.only(left: 16, bottom: 7),
                       child: Text(
-                        "Mesa de comedor Otax",
-                        style: TextStyle(
+                        widget.product.id.toString(),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 16,
                           letterSpacing: 0.15,
@@ -133,7 +133,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
               backgroundColor: ColorConstants.primaryColor,
               canTapOnHeader: true,
               headerBuilder: (BuildContext context, bool isExpanded) {
-                return ListTile(
+                return const ListTile(
                   title: Text(
                     "Paletización",
                     style: TextStyle(
@@ -144,7 +144,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                   ),
                 );
               },
-              body: ListTile(
+              body: const ListTile(
                 title: Text("title?"),
               ),
               isExpanded: true,
@@ -153,7 +153,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
               backgroundColor: ColorConstants.primaryColor,
               canTapOnHeader: true,
               headerBuilder: (BuildContext context, bool isExpanded) {
-                return ListTile(
+                return const ListTile(
                   title: Text(
                     "Localización",
                     style: TextStyle(
@@ -164,7 +164,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                   ),
                 );
               },
-              body: ListTile(
+              body: const ListTile(
                 title: Text(""),
               ),
               isExpanded: false,

@@ -1,6 +1,6 @@
 import 'package:firebase_testv2/cubit/product_list/product_list_cubit.dart';
 import 'package:firebase_testv2/screens/global_widgets/lateral_menu.dart';
-import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_card.dart';
+import 'package:firebase_testv2/screens/product_list_screen/product_list_draggable_card.dart';
 import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_element.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,8 +45,14 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     padding: const EdgeInsets.all(12.0),
                     child: CustomDropdownButton(
                       hintText: "Filtro",
-                      itemOptions: const ["Filtro", "TODAS"],
-                      functionOnchange: (String? string) {},
+                      itemOptions: const ["Filtro", "TODAS", "Test"],
+                      functionOnchange: (String? string) {
+                        switch (string) {
+                          case 'Test':
+                            Navigator.of(context).pushNamed(
+                                ProductsListDraggableScreen.routeName);
+                        }
+                      },
                     ),
                   ),
                   CustomDropdownButton(
@@ -70,7 +76,10 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<ProductsListCubit>(context)
+                              .orderById();
+                        },
                         child: Row(
                           children: const [
                             Text(

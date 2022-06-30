@@ -1,7 +1,6 @@
 import 'package:firebase_testv2/cubit/product_list/product_list_cubit.dart';
 import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
 import 'package:firebase_testv2/screens/options_screen/options_screen.dart';
-import 'package:firebase_testv2/screens/product_details/product_details.dart';
 import 'package:firebase_testv2/screens/product_list_screen/product_list_draggable_card.dart';
 import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +17,7 @@ class AppRouter {
           ),
           settings: settings,
         );
-      case ProductDetailsScreen.routeName:
-        return MaterialPageRoute(
-          builder: (_) => const ProductDetailsScreen(),
-          settings: settings,
-        );
+
       case OptionsScreen.routeName:
         return MaterialPageRoute(
           builder: (_) => const OptionsScreen(),

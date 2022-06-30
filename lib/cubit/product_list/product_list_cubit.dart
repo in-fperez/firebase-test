@@ -11,4 +11,8 @@ class ProductsListCubit extends Cubit<ProductListState> {
     var products = await ProductService.fetchProducts();
     emit(state.copyWith(products: products));
   }
+
+  void orderById() {
+    emit(state.copyWith(products: state.products.reversed.toList()));
+  }
 }
