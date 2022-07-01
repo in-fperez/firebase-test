@@ -1,7 +1,10 @@
 import 'package:firebase_testv2/services/firestore.dart';
 import 'package:firebase_testv2/services/models.dart';
+import 'package:firebase_testv2/widgets/bottomsheet_widget.dart';
 import 'package:firebase_testv2/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProductForm extends StatefulWidget {
   @override
@@ -12,11 +15,15 @@ class _ProductFormState extends State<ProductForm> {
   final formKey = GlobalKey<FormState>();
   double price = 0.0;
   String description = '';
+  String name = '';
+  late XFile? _imageFile;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text('Añadir Producto'),
+          backgroundColor: Colors.pinkAccent,
         ),
         body: Form(
           key: formKey,
@@ -24,28 +31,33 @@ class _ProductFormState extends State<ProductForm> {
           child: ListView(
             padding: EdgeInsets.all(16),
             children: [
-              buildUsername(),
+              buildName(),
+              const SizedBox(height: 5),
+              buildPrice(),
               const SizedBox(height: 16),
               buildEmail(),
-              const SizedBox(height: 32),
+              const SizedBox(height: 10),
+              buildImage(),
+              const SizedBox(height: 25),
               buildSubmit(),
             ],
           ),
         ),
       );
 
-  Widget buildUsername() => TextFormField(
+  Widget buildPrice() => TextFormField(
         decoration: InputDecoration(
           labelText: 'Precio',
           border: OutlineInputBorder(),
         ),
         validator: (value) {
-          if (value!.length < 4) {
-            return 'Enter at least 4 characters';
+          if (value!.length < 2) {
+            return 'Enter at least 2 characters';
           } else {
             return null;
           }
         },
+        keyboardType: TextInputType.number,
         onSaved: (value) => setState(() => price = double.parse(value!)),
       );
 
@@ -66,6 +78,37 @@ class _ProductFormState extends State<ProductForm> {
         onSaved: (value) => setState(() => description = value!),
       );
 
+  Widget buildName() => TextFormField(
+        decoration: InputDecoration(
+          labelText: 'Nombre',
+          border: OutlineInputBorder(),
+        ),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Enter an email';
+          } else {
+            return null;
+          }
+        },
+        maxLength: 25,
+        keyboardType: TextInputType.name,
+        onSaved: (value) => setState(() => name = value!),
+      );
+  Widget buildImage() => Center(
+        child: GestureDetector(
+          child: FaIcon(FontAwesomeIcons.upload),
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              builder: ((builder) => bottomSheet(
+                  context,
+                  () => takePhoto(ImageSource.camera),
+                  () => takePhoto(ImageSource.gallery))),
+            );
+          },
+        ),
+      );
+
   Widget buildSubmit() => Builder(
         builder: (context) => ButtonWidget(
           text: 'Submit',
@@ -74,12 +117,17 @@ class _ProductFormState extends State<ProductForm> {
                 .validate(); // FocusScope.of(context).unfocus();
 
             if (isValid) {
-              await FirestoreService().uploadProduct(Product(
-                  price: price,
-                  description: description,
-                  image: '0-367x267.jpg',
-                  name: 'product_60'));
-
+              formKey.currentState!.save();
+              try {
+                await FirestoreService().uploadImage(_imageFile!);
+                await FirestoreService().uploadProduct(Product(
+                    price: price,
+                    description: description,
+                    image: _imageFile!.name,
+                    name: name));
+              } catch (e) {
+                print(e);
+              }
               final message = 'Añadido';
               final snackBar = SnackBar(
                 content: Text(
@@ -93,4 +141,12 @@ class _ProductFormState extends State<ProductForm> {
           },
         ),
       );
+  void takePhoto(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(
+      source: source,
+    );
+    setState(() {
+      _imageFile = pickedFile;
+    });
+  }
 }

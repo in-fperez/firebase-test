@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_testv2/services/models.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -17,7 +21,7 @@ class FirestoreService {
   Future<Uint8List?> getProductImages(String namePath) async {
     final imageRef = storageRef.child('images/${namePath}');
     try {
-      const oneMegabyte = 1024 * 1024;
+      const oneMegabyte = 2024 * 1024;
       final Uint8List? data = await imageRef.getData(oneMegabyte);
       return data;
     } on FirebaseException catch (e) {
@@ -38,5 +42,37 @@ class FirestoreService {
         description: productToUpload.description,
       ),
     );
+  }
+
+  Future<void> uploadImage(XFile imagePath) async {
+    final imagesRef = storageRef.child('images/${imagePath.name}');
+    String filePath = imagePath.path;
+    File file = File(filePath);
+
+    try {
+      await imagesRef.putFile(file);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> downloadImages() async {
+    final imagesList = await listAllImages();
+    for (var image in imagesList.items) {
+      try {
+        final imagesRef = storageRef.child("images/${image.name}");
+        final appDir = await getApplicationDocumentsDirectory();
+        final file = File('${appDir.path}/${image.name}');
+        final downloadTask = await imagesRef.writeToFile(file);
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
+
+  Future<ListResult> listAllImages() async {
+    final imagesRef = storageRef.child('images');
+    final listRef = await imagesRef.listAll();
+    return listRef;
   }
 }

@@ -1,24 +1,42 @@
 import 'package:firebase_testv2/screens/form_screen.dart';
+import 'package:firebase_testv2/screens/login_screen.dart';
 import 'package:firebase_testv2/services/firestore.dart';
 import 'package:firebase_testv2/services/models.dart';
 import 'package:firebase_testv2/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:workmanager/workmanager.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 
+void callbackDispatcher() {
+  Workmanager().executeTask((taskName, inputData) async {
+    try {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    } catch (e) {
+      print(e);
+    }
+    return Future.value(true);
+  });
+}
+
 void main() async {
+  Workmanager().initialize(callbackDispatcher);
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Product>>(
@@ -33,13 +51,14 @@ class MyApp extends StatelessWidget {
               child: const FaIcon(FontAwesomeIcons.plus),
               backgroundColor: Colors.pinkAccent,
               onPressed: () {
+                FirestoreService().listAllImages();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ProductForm()),
                 );
               },
             ),
-            body: ProductCardList(),
+            body: LoginPage(),
           ),
         ),
         theme: ThemeData(
@@ -49,6 +68,13 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Workmanager().initialize(callbackDispatcher);
   }
 }
 
