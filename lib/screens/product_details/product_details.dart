@@ -1,4 +1,5 @@
 import 'package:firebase_testv2/models/product.dart';
+import 'package:firebase_testv2/screens/global_widgets/bottom_navigation_bar.dart';
 import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:flutter/material.dart';
 
@@ -63,48 +64,50 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                       ),
                     ),
                   ),
-                  const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
                         padding: EdgeInsets.fromLTRB(17, 0, 0, 8),
                         child: CustomWarehousePill(warehouseName: "VIL"),
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.local_print_shop_outlined,
-                          color: ColorConstants.accentColor,
-                        ),
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.star_border_outlined,
-                          color: ColorConstants.accentColor,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.crop_free_rounded,
-                          color: ColorConstants.accentColor,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.more_vert,
-                          color: ColorConstants.accentColor,
-                        ),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.local_print_shop_outlined,
+                              color: ColorConstants.accentColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.star_border_outlined,
+                              color: ColorConstants.accentColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.crop_free_rounded,
+                              color: ColorConstants.accentColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.more_vert,
+                              color: ColorConstants.accentColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
         TabBar(
@@ -127,51 +130,55 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
               horizontal: MediaQuery.of(context).size.width / 10),
           unselectedLabelColor: ColorConstants.ternaryColor,
         ),
-        ExpansionPanelList(
-          children: [
-            ExpansionPanel(
-              backgroundColor: ColorConstants.primaryColor,
-              canTapOnHeader: true,
-              headerBuilder: (BuildContext context, bool isExpanded) {
-                return const ListTile(
-                  title: Text(
-                    "Paletización",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
-                      letterSpacing: 0.15,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
+          child: ExpansionPanelList(
+            children: [
+              ExpansionPanel(
+                backgroundColor: ColorConstants.secondaryColor,
+                canTapOnHeader: true,
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return const ListTile(
+                    title: Text(
+                      "Paletización",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        letterSpacing: 0.15,
+                      ),
                     ),
-                  ),
-                );
-              },
-              body: const ListTile(
-                title: Text("title?"),
+                  );
+                },
+                body: const ListTile(
+                  title: Text("title?"),
+                ),
+                isExpanded: true,
               ),
-              isExpanded: true,
-            ),
-            ExpansionPanel(
-              backgroundColor: ColorConstants.primaryColor,
-              canTapOnHeader: true,
-              headerBuilder: (BuildContext context, bool isExpanded) {
-                return const ListTile(
-                  title: Text(
-                    "Localización",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
-                      letterSpacing: 0.15,
+              ExpansionPanel(
+                backgroundColor: ColorConstants.secondaryColor,
+                canTapOnHeader: true,
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return const ListTile(
+                    title: Text(
+                      "Localización",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        letterSpacing: 0.15,
+                      ),
                     ),
-                  ),
-                );
-              },
-              body: const ListTile(
-                title: Text(""),
+                  );
+                },
+                body: const ListTile(
+                  title: Text(""),
+                ),
+                isExpanded: false,
               ),
-              isExpanded: false,
-            ),
-          ],
+            ],
+          ),
         )
       ]),
+      bottomNavigationBar: CustomBottomBar(actualIndex: 1),
     );
   }
 }

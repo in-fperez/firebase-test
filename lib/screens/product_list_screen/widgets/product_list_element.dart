@@ -1,12 +1,15 @@
+import 'package:firebase_testv2/constants/constants.dart';
 import 'package:firebase_testv2/models/product.dart';
 import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
+import 'package:firebase_testv2/screens/product_details/product_details.dart';
 import 'package:firebase_testv2/screens/product_details/product_edit.dart';
 import 'package:flutter/material.dart';
 
 class ProductListElement extends StatelessWidget {
   final Product product;
+  final int index;
 
-  const ProductListElement({required this.product});
+  const ProductListElement({required this.product, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,8 @@ class ProductListElement extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: ((context) => ProductEditScreen(product: product))));
+                builder: ((context) =>
+                    ProductDetailsScreen(product: product))));
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6),

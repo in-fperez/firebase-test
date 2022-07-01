@@ -36,122 +36,153 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       drawer: const LateralMenu(),
       body: BlocBuilder<ProductsListCubit, ProductListState>(
         builder: ((context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 17),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: CustomDropdownButton(
-                      hintText: "Filtro",
-                      itemOptions: const ["Filtro", "TODAS", "Test"],
-                      functionOnchange: (String? string) {
-                        switch (string) {
-                          case 'Test':
-                            Navigator.of(context).pushNamed(
-                                ProductsListDraggableScreen.routeName);
-                        }
-                      },
+                  Container(
+                    decoration:
+                        BoxDecoration(color: ColorConstants.secondaryColor),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          MaterialButton(
+                            onPressed: () {
+                              BlocProvider.of<ProductsListCubit>(context)
+                                  .orderById();
+                            },
+                            child: Row(
+                              children: const [
+                                Text(
+                                  "Nombre",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    letterSpacing: 0.15,
+                                  ),
+                                ),
+                                Icon(Icons.keyboard_arrow_down_sharp)
+                              ],
+                            ),
+                          ),
+                          MaterialButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: const [
+                                Text(
+                                  "Almacén",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    letterSpacing: 0.15,
+                                  ),
+                                ),
+                                Icon(Icons.keyboard_arrow_down_sharp)
+                              ],
+                            ),
+                          ),
+                          MaterialButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: const [
+                                Text(
+                                  "Fecha",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    letterSpacing: 0.15,
+                                  ),
+                                ),
+                                Icon(Icons.keyboard_arrow_down_sharp)
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  CustomDropdownButton(
-                    hintText: "Ordenación",
-                    itemOptions: const [
-                      "Ordenación",
-                      'Fecha (antiguo primero)',
-                      'Fecha (nuevo primero)',
-                      'Novedades',
-                      'Personalizado'
-                    ],
-                    functionOnchange: (String? string) {},
+                  Expanded(
+                    child: Center(
+                      child: ListView.builder(
+                        itemCount: state.products.length,
+                        itemBuilder: (context, index) => Column(
+                          children: [
+                            Container(
+                              color: ((index % 2) == 0)
+                                  ? null
+                                  : ColorConstants.secondaryColor,
+                              child: ProductListElement(
+                                  product: state.products[index], index: index),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),
-              Container(
-                decoration: BoxDecoration(color: ColorConstants.secondaryColor),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      MaterialButton(
-                        onPressed: () {
-                          BlocProvider.of<ProductsListCubit>(context)
-                              .orderById();
-                        },
-                        child: Row(
-                          children: const [
-                            Text(
-                              "Nombre",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                letterSpacing: 0.15,
-                              ),
-                            ),
-                            Icon(Icons.keyboard_arrow_down_sharp)
-                          ],
-                        ),
-                      ),
-                      MaterialButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: const [
-                            Text(
-                              "Almacén",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                letterSpacing: 0.15,
-                              ),
-                            ),
-                            Icon(Icons.keyboard_arrow_down_sharp)
-                          ],
-                        ),
-                      ),
-                      MaterialButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: const [
-                            Text(
-                              "Fecha",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                letterSpacing: 0.15,
-                              ),
-                            ),
-                            Icon(Icons.keyboard_arrow_down_sharp)
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: ListView.builder(
-                    itemCount: state.products.length,
-                    itemBuilder: (context, index) => Column(
-                      children: [
-                        ProductListElement(product: state.products[index]),
-                        Divider(
-                          height: 1,
-                          color: ColorConstants.secondaryColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
+            ),
           );
         }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorConstants.accentColor,
+        child: Icon(Icons.filter_alt_outlined),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text("Filtrar"),
+              content: Container(
+                height: 110,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CustomDropdownButton(
+                      hintText: "Filtro",
+                      itemOptions: const ["Filtro", "TODAS", "Test"],
+                      functionOnchange: (String? string) {},
+                    ),
+                    CustomDropdownButton(
+                      hintText: "Ordenación",
+                      itemOptions: const [
+                        "Ordenación",
+                        'Fecha (antiguo primero)',
+                        'Fecha (nuevo primero)',
+                        'Novedades',
+                        'Personalizado'
+                      ],
+                      functionOnchange: (String? string) {},
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, "Cancelar");
+                  },
+                  child: Text("Cancelar"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, "Aplicar");
+                  },
+                  child: Text("Aplicar"),
+                ),
+              ],
+            ),
+          );
+        },
       ),
       bottomNavigationBar: const CustomBottomBar(
         actualIndex: 0,
