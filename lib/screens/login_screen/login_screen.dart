@@ -23,8 +23,8 @@ class LoginScreen extends StatelessWidget {
             // padding: const EdgeInsets.symmetric(vertical: ),
             children: <Widget>[
               ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
+                leading: const Icon(Icons.settings),
+                title: const Text('Settings'),
                 onTap: () {
                   Navigator.of(context).pushNamed(OptionsScreen.routeName);
                 },
@@ -46,28 +46,31 @@ class LoginScreen extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   children: const [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(16, 22, 16, 27),
-                      child: CustomTextField(hintText: 'E-mail'),
+                      padding: EdgeInsets.fromLTRB(20, 22, 20, 27),
+                      child: CustomTextField(
+                        hintText: 'Nombre',
+                      ),
                     ),
                     Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: CustomTextField(
-                          hintText: "Password",
-                          suffixIcon: Icon(Icons.remove_red_eye_rounded),
+                          hintText: "Contraseña",
                         )),
                   ],
                 ),
-                SubmitButton(
-                  buttonText: 'SIGN IN',
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(ProductsListScreen.routeName);
-                  },
+                Container(
+                  margin: const EdgeInsets.only(top: 30),
+                  child: SubmitButton(
+                    buttonText: 'Entrar',
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(ProductsListScreen.routeName);
+                    },
+                  ),
                 ),
               ],
             ),

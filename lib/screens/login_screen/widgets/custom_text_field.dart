@@ -15,8 +15,8 @@ class CustomTextField extends StatelessWidget {
         right: Radius.circular(4),
       ),
       child: TextField(
+        showCursor: false,
         decoration: InputDecoration(
-          enabledBorder: InputBorder.none,
           filled: true,
           fillColor: const Color(0xff2F2F2F),
           hintStyle: TextStyle(color: ColorConstants.secondaryColor),
