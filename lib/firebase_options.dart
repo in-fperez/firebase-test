@@ -52,9 +52,9 @@ class DefaultFirebaseOptions {
     appId: dotenv.env["appId"].toString(),
     messagingSenderId: dotenv.env["messagingSenderId"].toString(),
     projectId: dotenv.env["projectId"].toString(),
-    authDomain: dotenv.env["authDomain"].toString(),
-    storageBucket: dotenv.env["storageBucket"].toString(),
-    measurementId: dotenv.env["measurementId"].toString(),
+    authDomain: dotenv.env["authDomain"],
+    storageBucket: dotenv.env["storageBucket"],
+    measurementId: dotenv.env["measurementId"],
   );
 
   static FirebaseOptions android = FirebaseOptions(
@@ -62,7 +62,7 @@ class DefaultFirebaseOptions {
     appId: dotenv.env["appId"].toString(),
     messagingSenderId: dotenv.env["messagingSenderId"].toString(),
     projectId: dotenv.env["projectId"].toString(),
-    storageBucket: dotenv.env["storageBucket"].toString(),
+    storageBucket: dotenv.env["storageBucket"],
   );
 
   static FirebaseOptions ios = FirebaseOptions(
@@ -70,8 +70,8 @@ class DefaultFirebaseOptions {
     appId: dotenv.env["appId"].toString(),
     messagingSenderId: dotenv.env["messagingSenderId"].toString(),
     projectId: dotenv.env["projectId"].toString(),
-    storageBucket: dotenv.env["storageBucket"].toString(),
-    iosClientId: dotenv.env["iosClientId"].toString(),
-    iosBundleId: dotenv.env["iosBundleId"].toString(),
+    storageBucket: dotenv.env["storageBucket"],
+    iosClientId: dotenv.env["iosClientId"],
+    iosBundleId: dotenv.env["iosBundleId"],
   );
 }
