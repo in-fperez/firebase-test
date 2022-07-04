@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_testv2/services/models.dart';
@@ -45,6 +46,7 @@ class FirestoreService {
   }
 
   Future<void> uploadImage(XFile imagePath) async {
+    print(imagePath.path);
     final imagesRef = storageRef.child('images/${imagePath.name}');
     String filePath = imagePath.path;
     File file = File(filePath);
@@ -56,17 +58,28 @@ class FirestoreService {
     }
   }
 
-  Future<void> downloadImages() async {
-    final imagesList = await listAllImages();
-    for (var image in imagesList.items) {
-      try {
+  Future<bool> downloadImages() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      return true;
+    }
+    try {
+      final imagesList = await listAllImages();
+      final appDir = await getApplicationDocumentsDirectory();
+      List<Future> futures = <Future>[];
+      for (var image in imagesList.items) {
         final imagesRef = storageRef.child("images/${image.name}");
-        final appDir = await getApplicationDocumentsDirectory();
         final file = File('${appDir.path}/${image.name}');
-        final downloadTask = await imagesRef.writeToFile(file);
-      } catch (e) {
-        print(e);
+        if (File('${appDir.path}/${image.name}').existsSync()) {
+          continue;
+        }
+        futures.add(imagesRef.writeToFile(file));
       }
+      await Future.wait(futures);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 

@@ -1,4 +1,6 @@
 import 'package:firebase_testv2/main.dart';
+import 'package:firebase_testv2/services/firestore.dart';
+import 'package:firebase_testv2/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -14,18 +16,6 @@ class LoginPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0),
-              child: Center(
-                child: Container(
-                    width: 200,
-                    height: 150,
-                    /*decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(50.0)),*/
-                    child: Image.asset('asset/images/flutter-logo.png')),
-              ),
-            ),
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -64,8 +54,22 @@ class LoginPage extends StatelessWidget {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: FlatButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => ProductCardList()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => FutureBuilder(
+                              future: FirestoreService().downloadImages(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<void> snapshot) {
+                                if (snapshot.hasData) {
+                                  return ProductCardList();
+                                }
+                                return Scaffold(
+                                  body: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              })));
                 },
                 child: Text(
                   'Login',

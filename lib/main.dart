@@ -10,22 +10,13 @@ import 'package:workmanager/workmanager.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 
-void callbackDispatcher() {
-  Workmanager().executeTask((taskName, inputData) async {
-    try {
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
-    } catch (e) {
-      print(e);
-    }
-    return Future.value(true);
-  });
-}
+void callbackDispatcher() {}
 
 void main() async {
-  Workmanager().initialize(callbackDispatcher);
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -84,14 +75,27 @@ class ProductCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Product> productList = Provider.of<List<Product>>(context);
-    return ListView.builder(
-        itemCount: productList.length,
-        itemBuilder: (context, index) {
-          return ProductCard(
-              productList[index].image,
-              productList[index].description,
-              productList[index].name,
-              productList[index].price);
-        });
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: const FaIcon(FontAwesomeIcons.plus),
+        backgroundColor: Colors.pinkAccent,
+        onPressed: () {
+          FirestoreService().listAllImages();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ProductForm()),
+          );
+        },
+      ),
+      body: ListView.builder(
+          itemCount: productList.length,
+          itemBuilder: (context, index) {
+            return ProductCard(
+                productList[index].image,
+                productList[index].description,
+                productList[index].name,
+                productList[index].price);
+          }),
+    );
   }
 }

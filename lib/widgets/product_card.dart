@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_testv2/services/firestore.dart';
+import 'package:firebase_testv2/services/loadImageCard.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -31,13 +32,14 @@ class ProductCard extends StatelessWidget {
             title: Text(productName),
             subtitle: Text(productDescription),
             leading: FutureBuilder(
-              future: getApplicationDocumentsDirectory(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<Directory> snapshot) {
+              future: loadImageCard(image),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
-                  final imagePath = snapshot.data;
-                  print(File('${imagePath?.path}/$image'));
-                  return Image.file(File('${imagePath?.path}/${image}'));
+                  if (snapshot.data is String) {
+                    return Image.asset(snapshot.data);
+                  } else {
+                    return Image.file(snapshot.data);
+                  }
                 }
                 return const CircularProgressIndicator();
               },

@@ -5,6 +5,8 @@ import 'package:firebase_testv2/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class ProductForm extends StatefulWidget {
   @override
@@ -120,6 +122,7 @@ class _ProductFormState extends State<ProductForm> {
               formKey.currentState!.save();
               try {
                 await FirestoreService().uploadImage(_imageFile!);
+                await FirestoreService().downloadImages();
                 await FirestoreService().uploadProduct(Product(
                     price: price,
                     description: description,
