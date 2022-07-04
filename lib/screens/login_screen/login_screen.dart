@@ -1,9 +1,11 @@
 import 'package:firebase_testv2/constants/constants.dart';
+import 'package:firebase_testv2/cubit/internet/internet_cubit.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/custom_text_field.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/submit_button.dart';
 import 'package:firebase_testv2/screens/options_screen/options_screen.dart';
 import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 leading: const Icon(Icons.settings),
-                title: const Text('Settings'),
+                title: Text("Settings"),
                 onTap: () {
                   Navigator.of(context).pushNamed(OptionsScreen.routeName);
                 },
@@ -48,12 +50,10 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 Column(
-                  children: const [
+                  children: [
                     Padding(
                       padding: EdgeInsets.fromLTRB(20, 22, 20, 27),
-                      child: CustomTextField(
-                        hintText: 'Nombre',
-                      ),
+                      child: CustomTextField(hintText: "Usuario"),
                     ),
                     Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),

@@ -13,44 +13,47 @@ class ProductListElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: ((context) =>
-                    ProductDetailsScreen(product: product))));
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 6),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(
-              width: 100,
-              child: Text(
-                product.id.toString(),
-                style: const TextStyle(
+    return Container(
+      color: ((index % 2) == 0) ? null : ColorConstants.secondaryColor,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) =>
+                      ProductDetailsScreen(product: product))));
+        },
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 6),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                width: 100,
+                child: Text(
+                  product.id.toString(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    letterSpacing: 0.15,
+                  ),
+                ),
+              ),
+              const CustomWarehousePill(
+                warehouseName: 'VIL',
+              ),
+              const Text(
+                "26-01-2002",
+                style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
                   letterSpacing: 0.15,
                 ),
               ),
-            ),
-            const CustomWarehousePill(
-              warehouseName: 'VIL',
-            ),
-            const Text(
-              "26-01-2002",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                letterSpacing: 0.15,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

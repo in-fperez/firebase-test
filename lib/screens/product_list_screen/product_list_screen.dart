@@ -3,6 +3,7 @@ import 'package:firebase_testv2/screens/global_widgets/lateral_menu.dart';
 import 'package:firebase_testv2/screens/product_list_screen/product_list_draggable_card.dart';
 import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_element.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_testv2/cubit/internet/internet_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/constants.dart';
@@ -115,13 +116,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                         itemCount: state.products.length,
                         itemBuilder: (context, index) => Column(
                           children: [
-                            Container(
-                              color: ((index % 2) == 0)
-                                  ? null
-                                  : ColorConstants.secondaryColor,
-                              child: ProductListElement(
-                                  product: state.products[index], index: index),
-                            ),
+                            ProductListElement(
+                                product: state.products[index], index: index),
                           ],
                         ),
                       ),
