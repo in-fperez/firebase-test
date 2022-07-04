@@ -4,7 +4,6 @@ import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/constants.dart';
 import '../global_widgets/bottom_navigation_bar.dart';
 import '../global_widgets/dropdown_button.dart';
 
@@ -69,9 +68,8 @@ class _ProductsListScreenState extends State<ProductsListDraggableScreen> {
                     itemBuilder: (context, index) => Column(
                       children: [
                         ProductListCard(product: state.products[index]),
-                        Divider(
+                        const Divider(
                           height: 1,
-                          color: ColorConstants.secondaryColor,
                         ),
                       ],
                     ),

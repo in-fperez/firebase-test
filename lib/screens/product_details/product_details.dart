@@ -3,7 +3,6 @@ import 'package:firebase_testv2/screens/global_widgets/bottom_navigation_bar.dar
 import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({Key? key, required this.product})
@@ -67,7 +66,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.fromLTRB(17, 0, 0, 8),
                         child: CustomWarehousePill(warehouseName: "VIL"),
                       ),
@@ -75,30 +74,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                         children: [
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.local_print_shop_outlined,
-                              color: ColorConstants.accentColor,
                             ),
                           ),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.star_border_outlined,
-                              color: ColorConstants.accentColor,
                             ),
                           ),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.crop_free_rounded,
-                              color: ColorConstants.accentColor,
                             ),
                           ),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.more_vert,
-                              color: ColorConstants.accentColor,
                             ),
                           ),
                         ],
@@ -123,19 +118,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             ),
           ],
           controller: tabController,
-          labelColor: ColorConstants.accentColor,
-          indicatorColor: ColorConstants.accentColor,
           isScrollable: true,
           labelPadding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width / 10),
-          unselectedLabelColor: ColorConstants.ternaryColor,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
           child: ExpansionPanelList(
             children: [
               ExpansionPanel(
-                backgroundColor: ColorConstants.secondaryColor,
                 canTapOnHeader: true,
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return const ListTile(
@@ -155,7 +146,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                 isExpanded: true,
               ),
               ExpansionPanel(
-                backgroundColor: ColorConstants.secondaryColor,
                 canTapOnHeader: true,
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return const ListTile(
@@ -178,7 +168,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
           ),
         )
       ]),
-      bottomNavigationBar: CustomBottomBar(actualIndex: 1),
+      bottomNavigationBar: const CustomBottomBar(actualIndex: 1),
     );
   }
 }

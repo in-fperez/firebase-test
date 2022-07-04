@@ -1,16 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_testv2/cubit/theme_cubit/theme_cubit.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/constants.dart';
-import '../login_screen/widgets/custom_text_field.dart';
-import '../login_screen/widgets/submit_button.dart';
-import '../product_list_screen/product_list_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OptionsScreen extends StatelessWidget {
   const OptionsScreen({Key? key}) : super(key: key);
   static const routeName = '/options';
   @override
   Widget build(BuildContext context) {
+    ThemeCubit theme = BlocProvider.of<ThemeCubit>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Menú de ajustes"),
@@ -20,29 +17,26 @@ class OptionsScreen extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(35, 18, 0, 16),
-            child: Text(
+            child: const Text(
               "Avisos",
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 16,
                 letterSpacing: 0.25,
-                color: ColorConstants.ternaryColor,
               ),
             ),
           ),
-          Divider(
+          const Divider(
             height: 1,
-            color: ColorConstants.secondaryColor,
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(35, 28, 0, 20),
-            child: Text(
+            child: const Text(
               "Vertical",
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 16,
                 letterSpacing: 0.25,
-                color: ColorConstants.ternaryColor,
               ),
             ),
           ),
@@ -77,19 +71,17 @@ class OptionsScreen extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             height: 1,
-            color: ColorConstants.secondaryColor,
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(35, 26, 0, 20),
-            child: Text(
+            child: const Text(
               "Almacén",
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 16,
                 letterSpacing: 0.25,
-                color: ColorConstants.ternaryColor,
               ),
             ),
           ),
@@ -140,39 +132,37 @@ class OptionsScreen extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             height: 1,
-            color: ColorConstants.secondaryColor,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 margin: const EdgeInsets.fromLTRB(36, 20, 0, 21),
-                child: Text(
+                child: const Text(
                   "Dark mode",
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
                     letterSpacing: 0.25,
                     decoration: TextDecoration.underline,
-                    color: ColorConstants.ternaryColor,
                   ),
                 ),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 25, 28, 22),
                 child: Switch(
-                  activeColor: ColorConstants.accentColor,
                   value: true,
-                  onChanged: (bool value) {},
+                  onChanged: (bool value) {
+                    theme.changeTheme();
+                  },
                 ),
               ),
             ],
           ),
-          Divider(
+          const Divider(
             height: 1,
-            color: ColorConstants.secondaryColor,
           ),
         ],
       ),

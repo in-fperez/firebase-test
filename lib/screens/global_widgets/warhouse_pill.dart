@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomWarehousePill extends StatelessWidget {
@@ -11,12 +10,12 @@ class CustomWarehousePill extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40),
-        color: Color(0xff3e9a41),
+        color: const Color(0xff3e9a41),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       child: Text(
         warehouseName,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w500,
           fontSize: 12,

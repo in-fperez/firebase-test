@@ -1,6 +1,5 @@
 import 'package:firebase_testv2/cubit/product_list/product_list_cubit.dart';
 import 'package:firebase_testv2/screens/global_widgets/lateral_menu.dart';
-import 'package:firebase_testv2/screens/product_list_screen/product_list_draggable_card.dart';
 import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_element.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,8 +43,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    decoration:
-                        BoxDecoration(color: ColorConstants.secondaryColor),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Row(
@@ -118,7 +115,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                             Container(
                               color: ((index % 2) == 0)
                                   ? null
-                                  : ColorConstants.secondaryColor,
+                                  : ColorConstants.secondaryColorDark,
                               child: ProductListElement(
                                   product: state.products[index], index: index),
                             ),
@@ -134,14 +131,13 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         }),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: ColorConstants.accentColor,
-        child: Icon(Icons.filter_alt_outlined),
+        child: const Icon(Icons.filter_alt_outlined),
         onPressed: () {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text("Filtrar"),
-              content: Container(
+              title: const Text("Filtrar"),
+              content: SizedBox(
                 height: 110,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,13 +167,13 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                   onPressed: () {
                     Navigator.pop(context, "Cancelar");
                   },
-                  child: Text("Cancelar"),
+                  child: const Text("Cancelar"),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context, "Aplicar");
                   },
-                  child: Text("Aplicar"),
+                  child: const Text("Aplicar"),
                 ),
               ],
             ),

@@ -5,7 +5,6 @@ import 'package:firebase_testv2/screens/login_screen/widgets/custom_text_field.d
 import 'package:firebase_testv2/screens/login_screen/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
 
 class ProductEditScreen extends StatefulWidget {
   const ProductEditScreen({Key? key, required this.product}) : super(key: key);
@@ -76,30 +75,26 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.local_print_shop_outlined,
-                          color: ColorConstants.accentColor,
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.star_border_outlined,
-                          color: ColorConstants.accentColor,
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.crop_free_rounded,
-                          color: ColorConstants.accentColor,
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.more_vert,
-                          color: ColorConstants.accentColor,
                         ),
                       ),
                     ],
@@ -122,12 +117,9 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
             ),
           ],
           controller: tabController,
-          labelColor: ColorConstants.accentColor,
-          indicatorColor: ColorConstants.accentColor,
           isScrollable: true,
           labelPadding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width / 10),
-          unselectedLabelColor: ColorConstants.ternaryColor,
         ),
         Container(
           padding: const EdgeInsets.all(15),
@@ -137,17 +129,15 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
             style: TextStyle(fontSize: 10),
           ),
         ),
-        Divider(
+        const Divider(
           height: 1,
-          color: ColorConstants.secondaryColor,
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(16, 22, 16, 27),
           child: CustomTextField(hintText: 'Nombre de paletización'),
         ),
-        Divider(
+        const Divider(
           height: 1,
-          color: ColorConstants.secondaryColor,
         ),
         Container(
           padding: const EdgeInsets.all(20),
@@ -174,9 +164,8 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
           margin: const EdgeInsets.fromLTRB(16, 5, 16, 27),
           child: const CustomTextField(hintText: 'Medida masterbox'),
         ),
-        Divider(
+        const Divider(
           height: 1,
-          color: ColorConstants.secondaryColor,
         ),
         Container(
           padding: const EdgeInsets.all(20),
@@ -218,9 +207,8 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
             groupValue: 'paletType',
           ),
         ),
-        Divider(
+        const Divider(
           height: 1,
-          color: ColorConstants.secondaryColor,
         ),
         Container(
           padding: const EdgeInsets.all(20),
@@ -246,9 +234,8 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
             groupValue: 'referenceType',
           ),
         ),
-        Divider(
+        const Divider(
           height: 1,
-          color: ColorConstants.secondaryColor,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -265,17 +252,15 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add,
-                    color: ColorConstants.accentColor,
                     size: 19,
                   ),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.edit_outlined,
-                    color: ColorConstants.accentColor,
                     size: 19,
                   ),
                 ),

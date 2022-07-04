@@ -1,4 +1,3 @@
-import 'package:firebase_testv2/constants/constants.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/custom_text_field.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/submit_button.dart';
 import 'package:firebase_testv2/screens/options_screen/options_screen.dart';
@@ -18,7 +17,6 @@ class LoginScreen extends StatelessWidget {
       drawer: SizedBox(
         width: MediaQuery.of(context).size.width / 2,
         child: Drawer(
-          backgroundColor: ColorConstants.secondaryColor,
           child: ListView(
             // padding: const EdgeInsets.symmetric(vertical: ),
             children: <Widget>[

@@ -1,4 +1,3 @@
-import 'package:firebase_testv2/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -18,8 +17,7 @@ class CustomTextField extends StatelessWidget {
         showCursor: false,
         decoration: InputDecoration(
           filled: true,
-          fillColor: const Color(0xff2F2F2F),
-          hintStyle: TextStyle(color: ColorConstants.secondaryColor),
+          fillColor: Theme.of(context).colorScheme.secondary,
           label: Text(
             hintText,
             style: const TextStyle(

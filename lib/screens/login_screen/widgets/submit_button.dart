@@ -1,4 +1,3 @@
-import 'package:firebase_testv2/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
@@ -18,17 +17,15 @@ class SubmitButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
           child: TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: ColorConstants.accentColor,
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             ),
             onPressed: onPressed,
             child: Text(
               buttonText,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800,
                 letterSpacing: 1.25,
-                color: ColorConstants.primaryColor,
               ),
             ),
           ),

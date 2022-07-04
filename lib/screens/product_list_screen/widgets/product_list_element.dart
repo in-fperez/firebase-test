@@ -1,8 +1,6 @@
-import 'package:firebase_testv2/constants/constants.dart';
 import 'package:firebase_testv2/models/product.dart';
 import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:firebase_testv2/screens/product_details/product_details.dart';
-import 'package:firebase_testv2/screens/product_details/product_edit.dart';
 import 'package:flutter/material.dart';
 
 class ProductListElement extends StatelessWidget {
