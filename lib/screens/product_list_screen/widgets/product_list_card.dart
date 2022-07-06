@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/product.dart';
+import '../../../models/product/product.dart';
 import '../../global_widgets/warhouse_pill.dart';
 
 class ProductListCard extends StatelessWidget {

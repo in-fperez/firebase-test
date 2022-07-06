@@ -1,10 +1,11 @@
+import 'package:firebase_testv2/config/shared_preferences.dart';
 import 'package:firebase_testv2/cubit/theme_cubit/theme_cubit.dart';
 import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
 import 'package:firebase_testv2/theme/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'router/app_router.dart';
+import 'config/app_router.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +15,7 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await SharedPrefs.init();
   runApp(
     MultiBlocProvider(
       providers: [BlocProvider(create: (coontext) => ThemeCubit())],

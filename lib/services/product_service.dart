@@ -1,5 +1,5 @@
 import 'package:firebase_testv2/firestore/firestore_instance.dart';
-import 'package:firebase_testv2/models/product.dart';
+import 'package:firebase_testv2/models/product/product.dart';
 
 class ProductService {
   static Future<List<Product>> fetchProducts() async {

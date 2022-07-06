@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_testv2/models/product.dart';
+import 'package:firebase_testv2/models/product/product.dart';
 import 'package:firebase_testv2/services/product_service.dart';
 
 part 'product_list_state.dart';

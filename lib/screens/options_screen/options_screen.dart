@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OptionsScreen extends StatelessWidget {
   const OptionsScreen({Key? key}) : super(key: key);
   static const routeName = '/options';
+
   @override
   Widget build(BuildContext context) {
     ThemeCubit theme = BlocProvider.of<ThemeCubit>(context, listen: false);

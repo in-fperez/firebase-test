@@ -1,10 +1,9 @@
-import 'package:firebase_testv2/models/product.dart';
+import 'package:firebase_testv2/models/product/product.dart';
 import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/custom_text_field.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
-
 
 class ProductEditScreen extends StatefulWidget {
   const ProductEditScreen({Key? key, required this.product}) : super(key: key);
@@ -14,8 +13,7 @@ class ProductEditScreen extends StatefulWidget {
   State<ProductEditScreen> createState() => _ProductDetailsScreenState();
 }
 
-class _ProductDetailsScreenState extends State<ProductEditScreen>
-    with TickerProviderStateMixin {
+class _ProductDetailsScreenState extends State<ProductEditScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final TabController tabController = TabController(length: 3, vsync: this);
@@ -118,8 +116,7 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
           ],
           controller: tabController,
           isScrollable: true,
-          labelPadding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width / 10),
+          labelPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 10),
         ),
         Container(
           padding: const EdgeInsets.all(15),
@@ -153,8 +150,7 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(16, 5, 16, 27),
-          child: const CustomTextField(
-              hintText: 'Ancho', suffixIcon: Icon(Icons.info)),
+          child: const CustomTextField(hintText: 'Ancho', suffixIcon: Icon(Icons.info)),
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(16, 5, 16, 27),

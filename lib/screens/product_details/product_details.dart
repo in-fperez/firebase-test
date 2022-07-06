@@ -1,20 +1,17 @@
-import 'package:firebase_testv2/models/product.dart';
+import 'package:firebase_testv2/models/product/product.dart';
 import 'package:firebase_testv2/screens/global_widgets/bottom_navigation_bar.dart';
 import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:flutter/material.dart';
 
-
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({Key? key, required this.product})
-      : super(key: key);
+  const ProductDetailsScreen({Key? key, required this.product}) : super(key: key);
   static const routeName = '/product_details';
   final Product product;
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
-class _ProductDetailsScreenState extends State<ProductDetailsScreen>
-    with TickerProviderStateMixin {
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final TabController tabController = TabController(length: 3, vsync: this);
@@ -119,8 +116,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
           ],
           controller: tabController,
           isScrollable: true,
-          labelPadding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width / 10),
+          labelPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 10),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
