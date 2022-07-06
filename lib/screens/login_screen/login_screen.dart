@@ -1,40 +1,39 @@
-import 'package:firebase_testv2/constants/constants.dart';
-import 'package:firebase_testv2/cubit/internet/internet_cubit.dart';
-import 'package:firebase_testv2/screens/login_screen/widgets/custom_text_field.dart';
-import 'package:firebase_testv2/screens/login_screen/widgets/submit_button.dart';
-import 'package:firebase_testv2/screens/options_screen/options_screen.dart';
+import 'package:firebase_testv2/screens/login_screen/widgets/login_inputs_widget.dart';
+import 'package:firebase_testv2/screens/login_screen/widgets/login_submit_button_widget.dart';
 import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
+import 'package:firebase_testv2/screens/task_list_screen/task_list_screen.dart';
+import 'package:firebase_testv2/screens/widgets/app_layout/app_layout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
+import '../../cubit/context/context_cubit.dart';
+
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
   static const routeName = '/';
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailTextController = TextEditingController();
+  TextEditingController passwordTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    this.emailTextController.dispose();
+    this.passwordTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Log in"),
-      ),
-      drawer: SizedBox(
-        width: MediaQuery.of(context).size.width / 2,
-        child: Drawer(
-          backgroundColor: ColorConstants.secondaryColor,
-          child: ListView(
-            // padding: const EdgeInsets.symmetric(vertical: ),
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: Text("Settings"),
-                onTap: () {
-                  Navigator.of(context).pushNamed(OptionsScreen.routeName);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+    var contextCubit = BlocProvider.of<ContextCubit>(context);
+    return AppLayoutWidget(
+      title: "Log in",
+      shouldBeLogged: false,
+      showBottomNavigationBar: false,
       body: Column(
         children: [
           const Expanded(
@@ -49,28 +48,23 @@ class LoginScreen extends StatelessWidget {
             flex: 5,
             child: Column(
               children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20, 22, 20, 27),
-                      child: CustomTextField(hintText: "Usuario"),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: CustomTextField(
-                          hintText: "Contraseña",
-                        )),
-                  ],
+                LoginInputsWidget(
+                  emailTextController: this.emailTextController,
+                  passwordTextController: this.passwordTextController,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 30),
-                  child: SubmitButton(
-                    buttonText: 'Entrar',
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(ProductsListScreen.routeName);
-                    },
-                  ),
+                LoginSubmitButtonWidget(
+                  onSubmit: () async {
+                    var email = this.emailTextController.text;
+                    var password = this.passwordTextController.text;
+                    contextCubit.login(
+                      email: email,
+                      password: password,
+                      context: context,
+                    );
+                    Navigator.of(context).pushNamed(
+                      TaskListScreen.routeName,
+                    );
+                  },
                 ),
               ],
             ),

@@ -1,20 +1,16 @@
-import 'package:firebase_testv2/constants/constants.dart';
 import 'package:firebase_testv2/models/product.dart';
-import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:firebase_testv2/screens/product_details/product_details.dart';
-import 'package:firebase_testv2/screens/product_details/product_edit.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ProductListElement extends StatelessWidget {
   final Product product;
-  final int index;
 
-  const ProductListElement({required this.product, required this.index});
+  const ProductListElement({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: ((index % 2) == 0) ? null : ColorConstants.secondaryColor,
+    return Card(
       child: GestureDetector(
         onTap: () {
           Navigator.push(
@@ -31,7 +27,7 @@ class ProductListElement extends StatelessWidget {
               SizedBox(
                 width: 100,
                 child: Text(
-                  product.id.toString(),
+                  product.name,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w400,
@@ -40,11 +36,9 @@ class ProductListElement extends StatelessWidget {
                   ),
                 ),
               ),
-              const CustomWarehousePill(
-                warehouseName: 'VIL',
-              ),
-              const Text(
-                "26-01-2002",
+              Chip(label: Text(this.product.warehouse)),
+              Text(
+                DateFormat.yMd().format(this.product.dateUpd),
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w400,

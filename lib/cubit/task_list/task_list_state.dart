@@ -1,33 +1,33 @@
-part of 'product_list_cubit.dart';
+part of 'task_list_cubit.dart';
 
-class ProductListState {
-  Map<String, Product> productsById = <String, Product>{};
+class TaskListState {
+  Map<String, Task> tasksById = <String, Task>{};
   Map<String, dynamic>? ordering;
   late Map<String, dynamic>? filter;
   late Map<String, dynamic>? view;
   bool isLoading;
 
-  ProductListState({
-    Map<String, Product>? productsById,
+  TaskListState({
+    Map<String, Task>? tasksById,
     this.isLoading = false,
     this.ordering,
     this.filter,
     this.view,
   }) {
-    this.productsById = productsById ?? this.productsById;
+    this.tasksById = tasksById ?? this.tasksById;
   }
 
-  ProductListState copyWith({
-    Map<String, Product>? productsById,
+  TaskListState copyWith({
+    Map<String, Task>? tasksById,
     bool? isLoading,
     Map<String, dynamic>? ordering,
     Map<String, dynamic>? filter,
     Map<String, dynamic>? view,
   }) {
-    return ProductListState(
-      productsById: productsById ?? this.productsById,
+    return TaskListState(
+      tasksById: tasksById ?? this.tasksById,
       isLoading: isLoading ?? this.isLoading,
-      ordering: ordering ?? this.ordering ?? productOrderingOptions[0],
+      ordering: ordering ?? this.ordering ?? taskOrderingOptions[0],
       filter: filter ?? this.filter,
       view: view ?? this.view,
     );

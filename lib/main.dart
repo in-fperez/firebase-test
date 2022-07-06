@@ -20,19 +20,21 @@ Future main() async {
 
 class IcemanApp extends StatelessWidget {
   final Connectivity connectivity;
-  const IcemanApp({Key? key, required this.connectivity}) : super(key: key);
+  final AppRouter appRouter = AppRouter();
+  IcemanApp({Key? key, required this.connectivity}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    AppRouter appRouter = AppRouter();
     return BlocProvider(
       create: (context) => InternetCubit(connectivity: connectivity),
       child: MaterialApp(
         title: 'Iceman App',
+        debugShowCheckedModeBanner: false,
         theme: Themes.getLight(),
         darkTheme: Themes.getDark(),
         themeMode: ThemeMode.dark,
         initialRoute: LoginScreen.routeName,
-        onGenerateRoute: appRouter.onGenerateRoute,
+        onGenerateRoute: this.appRouter.onGenerateRoute,
       ),
     );
   }

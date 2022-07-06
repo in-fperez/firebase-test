@@ -1,14 +1,13 @@
 import 'package:firebase_testv2/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../models/product.dart';
-import '../../global_widgets/warhouse_pill.dart';
 
-class ProductListCard extends StatelessWidget {
+class ProductCardWidget extends StatelessWidget {
   final Product product;
-
-  const ProductListCard({Key? key, required this.product}) : super(key: key);
+  const ProductCardWidget({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class ProductListCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 0, 11, 0),
                 child: Text(
-                  "26-01-2002",
+                  DateFormat.yMd().format(this.product.dateUpd),
                   style: TextStyle(
                     color: ColorConstants.ternaryColor,
                     fontWeight: FontWeight.w400,
@@ -46,8 +45,8 @@ class ProductListCard extends StatelessWidget {
                   ),
                 ),
               ),
-              CustomWarehousePill(
-                warehouseName: 'VIL',
+              Chip(
+                label: Text(this.product.name),
               ),
             ],
           ),

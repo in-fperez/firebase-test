@@ -1,9 +1,8 @@
 import 'package:firebase_testv2/models/product.dart';
-import 'package:firebase_testv2/screens/global_widgets/bottom_navigation_bar.dart';
-import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
+import '../widgets/app_layout/app_layout_widget.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({Key? key, required this.product})
@@ -19,10 +18,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
   @override
   Widget build(BuildContext context) {
     final TabController tabController = TabController(length: 3, vsync: this);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Ficha"),
-      ),
+    return AppLayoutWidget(
+      title: "Ficha",
+      showBottomNavigationBar: true,
+      shouldBeLogged: true,
       body: Column(children: [
         Row(
           children: [
@@ -69,7 +68,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(17, 0, 0, 8),
-                        child: CustomWarehousePill(warehouseName: "VIL"),
+                        child: Chip(
+                          label: Text(''),
+                        ),
                       ),
                       Row(
                         children: [
@@ -178,7 +179,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
           ),
         )
       ]),
-      bottomNavigationBar: CustomBottomBar(actualIndex: 1),
     );
   }
 }

@@ -1,12 +1,10 @@
 import 'package:firebase_testv2/cubit/product_list/product_list_cubit.dart';
-import 'package:firebase_testv2/screens/global_widgets/lateral_menu.dart';
-import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_card.dart';
+import 'package:firebase_testv2/screens/product_list_screen/constants/product_options_constants.dart';
+import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_widget.dart';
+import 'package:firebase_testv2/screens/widgets/app_layout/app_layout_widget.dart';
+import 'package:firebase_testv2/screens/widgets/dropdown/dropdown_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../constants/constants.dart';
-import '../global_widgets/bottom_navigation_bar.dart';
-import '../global_widgets/dropdown_button.dart';
 
 class ProductsListDraggableScreen extends StatefulWidget {
   const ProductsListDraggableScreen({Key? key}) : super(key: key);
@@ -27,14 +25,13 @@ class _ProductsListScreenState extends State<ProductsListDraggableScreen> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ProductsListCubit>(context).fetchProducts();
+    var productListCubit = BlocProvider.of<ProductListCubit>(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Listing"),
-      ),
-      drawer: const LateralMenu(),
-      body: BlocBuilder<ProductsListCubit, ProductListState>(
+    return AppLayoutWidget(
+      title: "Listing",
+      shouldBeLogged: true,
+      showBottomNavigationBar: true,
+      body: BlocBuilder<ProductListCubit, ProductListState>(
         builder: ((context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,47 +40,40 @@ class _ProductsListScreenState extends State<ProductsListDraggableScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: CustomDropdownButton(
-                      hintText: "Filtro",
-                      itemOptions: const ["Filtro", "TODAS"],
-                      functionOnchange: (String? string) {},
+                    child: DropdownWidget(
+                      title: "Filtro",
+                      items: productFilteringOptions,
+                      selected: state.filter?['id'],
+                      value: 'id',
+                      onChanged: (id) {
+                        if (id != null) {
+                          productListCubit.updateFilter(id);
+                        }
+                      },
                     ),
                   ),
-                  CustomDropdownButton(
-                    hintText: "Ordenación",
-                    itemOptions: const [
-                      "Ordenación",
-                      'Fecha (antiguo primero)',
-                      'Fecha (nuevo primero)',
-                      'Novedades',
-                      'Personalizado'
-                    ],
-                    functionOnchange: (String? string) {},
+                  DropdownWidget(
+                    title: "Ordenación",
+                    items: productOrderingOptions,
+                    selected: state.ordering?["id"],
+                    value: 'id',
+                    onChanged: (id) {
+                      if (id != null) {
+                        productListCubit.updateOrdering(id);
+                      }
+                    },
                   )
                 ],
               ),
               Expanded(
-                child: Center(
-                  child: ListView.builder(
-                    itemCount: state.products.length,
-                    itemBuilder: (context, index) => Column(
-                      children: [
-                        ProductListCard(product: state.products[index]),
-                        Divider(
-                          height: 1,
-                          color: ColorConstants.secondaryColor,
-                        ),
-                      ],
-                    ),
-                  ),
+                child: ProductListWidget(
+                  products: productListCubit.getProducts(),
+                  isCard: true,
                 ),
               )
             ],
           );
         }),
-      ),
-      bottomNavigationBar: const CustomBottomBar(
-        actualIndex: 0,
       ),
     );
   }

@@ -1,8 +1,9 @@
 import 'package:firebase_testv2/models/product.dart';
-import 'package:firebase_testv2/screens/global_widgets/warhouse_pill.dart';
 import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
-import 'package:firebase_testv2/screens/login_screen/widgets/custom_text_field.dart';
-import 'package:firebase_testv2/screens/login_screen/widgets/submit_button.dart';
+import 'package:firebase_testv2/screens/widgets/app_layout/app_layout_widget.dart';
+import 'package:firebase_testv2/screens/widgets/app_layout/widgets/divider_widget.dart';
+import 'package:firebase_testv2/screens/widgets/button/submit_button_widget.dart';
+import 'package:firebase_testv2/screens/widgets/input_text/input_text_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
@@ -17,13 +18,30 @@ class ProductEditScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductEditScreen>
     with TickerProviderStateMixin {
+  TextEditingController paletNameTextController = TextEditingController();
+  TextEditingController heigthTextController = TextEditingController();
+  TextEditingController widthTextController = TextEditingController();
+  TextEditingController lengthTextController = TextEditingController();
+  TextEditingController masterboxMeasuresTextController =
+      TextEditingController();
+
+  @override
+  void dispose() {
+    this.paletNameTextController.dispose();
+    this.heigthTextController.dispose();
+    this.widthTextController.dispose();
+    this.lengthTextController.dispose();
+    this.masterboxMeasuresTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final TabController tabController = TabController(length: 3, vsync: this);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Ficha"),
-      ),
+    return AppLayoutWidget(
+      title: "Ficha",
+      shouldBeLogged: true,
+      showBottomNavigationBar: true,
       body: ListView(children: [
         Row(
           children: [
@@ -69,7 +87,7 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(17, 0, 0, 8),
-                        child: CustomWarehousePill(warehouseName: "VIL"),
+                        child: Chip(label: Text('')),
                       )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -137,18 +155,15 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
             style: TextStyle(fontSize: 10),
           ),
         ),
-        Divider(
-          height: 1,
-          color: ColorConstants.secondaryColor,
-        ),
-        const Padding(
+        DividerWidget(),
+        Padding(
           padding: EdgeInsets.fromLTRB(16, 22, 16, 27),
-          child: CustomTextField(hintText: 'Nombre de paletización'),
+          child: InputTextWidget(
+            placeHolder: 'Nombre de paletización',
+            textEditingController: paletNameTextController,
+          ),
         ),
-        Divider(
-          height: 1,
-          color: ColorConstants.secondaryColor,
-        ),
+        DividerWidget(),
         Container(
           padding: const EdgeInsets.all(20),
           alignment: Alignment.centerLeft,
@@ -159,25 +174,34 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(16, 5, 16, 27),
-          child: const CustomTextField(hintText: 'Alto'),
+          child: InputTextWidget(
+            placeHolder: 'Alto',
+            textEditingController: heigthTextController,
+          ),
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(16, 5, 16, 27),
-          child: const CustomTextField(
-              hintText: 'Ancho', suffixIcon: Icon(Icons.info)),
+          child: InputTextWidget(
+            placeHolder: 'Ancho',
+            suffixIcon: Icon(Icons.info),
+            textEditingController: widthTextController,
+          ),
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(16, 5, 16, 27),
-          child: const CustomTextField(hintText: 'Largo'),
+          child: InputTextWidget(
+            placeHolder: 'Largo',
+            textEditingController: lengthTextController,
+          ),
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(16, 5, 16, 27),
-          child: const CustomTextField(hintText: 'Medida masterbox'),
+          child: InputTextWidget(
+            placeHolder: 'Medida masterbox',
+            textEditingController: masterboxMeasuresTextController,
+          ),
         ),
-        Divider(
-          height: 1,
-          color: ColorConstants.secondaryColor,
-        ),
+        DividerWidget(),
         Container(
           padding: const EdgeInsets.all(20),
           alignment: Alignment.centerLeft,
@@ -218,10 +242,7 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
             groupValue: 'paletType',
           ),
         ),
-        Divider(
-          height: 1,
-          color: ColorConstants.secondaryColor,
-        ),
+        DividerWidget(),
         Container(
           padding: const EdgeInsets.all(20),
           alignment: Alignment.centerLeft,
@@ -246,10 +267,7 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
             groupValue: 'referenceType',
           ),
         ),
-        Divider(
-          height: 1,
-          color: ColorConstants.secondaryColor,
-        ),
+        DividerWidget(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -297,8 +315,8 @@ class _ProductDetailsScreenState extends State<ProductEditScreen>
             fit: BoxFit.fill,
           ),
         ),
-        SubmitButton(
-          buttonText: 'Guardar',
+        ButtonWidget(
+          text: 'Guardar',
           onPressed: () {
             Navigator.of(context).pushNamed(LoginScreen.routeName);
           },
