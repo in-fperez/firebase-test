@@ -1,22 +1,21 @@
+import 'package:firebase_testv2/cubit/images_cubit.dart';
 import 'package:firebase_testv2/screens/form_screen.dart';
 import 'package:firebase_testv2/screens/login_screen.dart';
 import 'package:firebase_testv2/services/firestore.dart';
 import 'package:firebase_testv2/services/models.dart';
+import 'package:firebase_testv2/services/push_notification_service.dart';
 import 'package:firebase_testv2/widgets/product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:workmanager/workmanager.dart';
-import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 
-void callbackDispatcher() {}
+final cubit = ImagesCubit();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  BackgroundService.initializeApp();
+  cubit.updateCount();
+  print('hola tio');
   runApp(const MyApp());
 }
 
@@ -42,7 +41,6 @@ class _MyAppState extends State<MyApp> {
               child: const FaIcon(FontAwesomeIcons.plus),
               backgroundColor: Colors.pinkAccent,
               onPressed: () {
-                FirestoreService().listAllImages();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ProductForm()),
@@ -65,7 +63,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Workmanager().initialize(callbackDispatcher);
   }
 }
 
@@ -80,7 +77,6 @@ class ProductCardList extends StatelessWidget {
         child: const FaIcon(FontAwesomeIcons.plus),
         backgroundColor: Colors.pinkAccent,
         onPressed: () {
-          FirestoreService().listAllImages();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ProductForm()),

@@ -1,13 +1,30 @@
+import 'package:firebase_testv2/cubit/images_cubit.dart';
 import 'package:firebase_testv2/main.dart';
-import 'package:firebase_testv2/services/firestore.dart';
-import 'package:firebase_testv2/widgets/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => cubit,
+      child: const LoginForm(),
+    );
+  }
+}
+
+class LoginForm extends StatelessWidget {
+  const LoginForm({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var downloadState = Provider.of<ImagesCubit>(context, listen: true);
+    Color colorTopModalSheet =
+        cubit.isDownloadFinished ? Colors.green : Colors.red;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -16,6 +33,48 @@ class LoginPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                color: colorTopModalSheet,
+              ),
+              height: 70,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        cubit.isDownloadFinished
+                            ? const Text('')
+                            : const CircularProgressIndicator(
+                                color: Colors.green,
+                              ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${downloadState.downloadedImages.toString()}/${downloadState.totalImages.toString()} Images downloaded',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 19,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -41,6 +100,7 @@ class LoginPage extends StatelessWidget {
             FlatButton(
               onPressed: () {
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
+                downloadState.updateCount();
               },
               child: Text(
                 'Forgot Password',
@@ -57,19 +117,7 @@ class LoginPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => FutureBuilder(
-                              future: FirestoreService().downloadImages(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<void> snapshot) {
-                                if (snapshot.hasData) {
-                                  return ProductCardList();
-                                }
-                                return Scaffold(
-                                  body: const Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                );
-                              })));
+                          builder: (_) => const ProductCardList()));
                 },
                 child: Text(
                   'Login',

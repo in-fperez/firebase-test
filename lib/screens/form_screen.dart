@@ -122,16 +122,16 @@ class _ProductFormState extends State<ProductForm> {
               formKey.currentState!.save();
               try {
                 await FirestoreService().uploadImage(_imageFile!);
-                await FirestoreService().downloadImages();
                 await FirestoreService().uploadProduct(Product(
-                    price: price,
-                    description: description,
-                    image: _imageFile!.name,
-                    name: name));
+                  price: price,
+                  description: description,
+                  image: _imageFile!.name,
+                  name: name,
+                ));
               } catch (e) {
                 print(e);
               }
-              final message = 'Añadido';
+              final message = 'Producto Añadido';
               final snackBar = SnackBar(
                 content: Text(
                   message,

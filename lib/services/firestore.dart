@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_testv2/main.dart';
 import 'package:firebase_testv2/services/models.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -60,22 +61,24 @@ class FirestoreService {
 
   Future<bool> downloadImages() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
+    print('hola soy perole el mas perole');
     if (connectivityResult == ConnectivityResult.none) {
-      return true;
+      return false;
     }
     try {
       final imagesList = await listAllImages();
       final appDir = await getApplicationDocumentsDirectory();
-      List<Future> futures = <Future>[];
+      await Directory('${appDir.path}/images/').create(recursive: true);
       for (var image in imagesList.items) {
         final imagesRef = storageRef.child("images/${image.name}");
-        final file = File('${appDir.path}/${image.name}');
+        final file = File('${appDir.path}/${image.fullPath}');
         if (File('${appDir.path}/${image.name}').existsSync()) {
           continue;
         }
-        futures.add(imagesRef.writeToFile(file));
+        imagesRef.writeToFile(file);
+        cubit.updateCount();
       }
-      await Future.wait(futures);
+      cubit.updateDownloadProcess();
       return true;
     } catch (e) {
       print(e);
@@ -86,6 +89,8 @@ class FirestoreService {
   Future<ListResult> listAllImages() async {
     final imagesRef = storageRef.child('images');
     final listRef = await imagesRef.listAll();
+    print('El meu length es de ${listRef.items.length}');
+    cubit.totalImages = listRef.items.length + 1;
     return listRef;
   }
 }
