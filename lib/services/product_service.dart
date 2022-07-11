@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../firestore/firestore_instance.dart';
-import '../models/product.dart';
+
+import 'package:firebase_testv2/firestore/firestore_instance.dart';
+import 'package:firebase_testv2/models/product.dart';
 
 class ProductService {
   static void initProductSnapshotsListener(

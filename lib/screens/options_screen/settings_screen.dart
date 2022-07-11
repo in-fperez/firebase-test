@@ -1,16 +1,17 @@
+import 'package:firebase_testv2/cubit/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'package:firebase_testv2/firestore/firestore_instance.dart';
 import 'package:firebase_testv2/screens/widgets/button/submit_button_widget.dart';
 import 'package:firebase_testv2/screens/widgets/app_layout/widgets/divider_widget.dart';
-import 'package:firebase_testv2/screens/options_screen/widgets/settings_list_widget.dart';
+import 'package:firebase_testv2/screens/widgets/radio_list/radio_list_widget.dart';
 import 'package:firebase_testv2/screens/options_screen/widgets/settings_title_widget.dart';
-
-import '../widgets/app_layout/app_layout_widget.dart';
-import '../../constants/constants.dart';
-import '../../cubit/context/context_cubit.dart';
-import '../../models/vertical.dart';
-import '../../models/warehouse.dart';
+import 'package:firebase_testv2/constants/constants.dart';
+import 'package:firebase_testv2/cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/models/vertical.dart';
+import 'package:firebase_testv2/models/warehouse.dart';
+import 'package:firebase_testv2/screens/widgets/app_layout/app_layout_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -23,7 +24,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    var contextCubit = BlocProvider.of<ContextCubit>(context);
+    var themeCubit = BlocProvider.of<ThemeCubit>(context, listen: false);
+    var contextCubit = BlocProvider.of<ContextCubit>(context, listen: false);
     var verticals = contextCubit.state.verticals;
     var warehouses = contextCubit.state.warehouses;
     return BlocBuilder<ContextCubit, ContextState>(builder: (context, state) {
@@ -38,11 +40,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingsTitleWidget(title: "Avisos"),
               DividerWidget(),
               SettingsTitleWidget(title: "Vertical"),
-              SettingsListWidget(
+              OptionsListWidget(
                 defaultSelected: this.getDefaultSelectedVertical(verticals),
-                settings: verticals.map(
+                options: verticals.map(
                   (vertical) {
-                    return Setting(
+                    return Option(
                       name: vertical.name,
                       onChanged: <String>(verticalName) {
                         if (verticalName != null) {
@@ -62,12 +64,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 margin: const EdgeInsets.only(left: 15, bottom: 30),
                 child: Column(
                   children: [
-                    SettingsListWidget(
+                    OptionsListWidget(
                       defaultSelected:
                           this.getDefaultSelectedWarehouse(warehouses),
-                      settings: warehouses.map(
+                      options: warehouses.map(
                         (warehouse) {
-                          return Setting(
+                          return Option(
                             name: warehouse.name,
                             onChanged: <String>(warehouseName) {
                               if (warehouseName != null) {
@@ -105,22 +107,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     margin: const EdgeInsets.fromLTRB(0, 25, 28, 22),
                     child: Switch(
                       activeColor: ColorConstants.accentColor,
-                      value: contextCubit.state.darkMode,
+                      value: themeCubit.state.isDark,
                       onChanged: (bool value) {
-                        contextCubit.updateThemeMode(value);
-                        print(contextCubit.state.darkMode);
+                        themeCubit.changeTheme();
                       },
                     ),
                   ),
                 ],
               ),
               DividerWidget(),
-              ButtonWidget(
-                  text: "CLEAN STORAGE",
-                  onPressed: () async {
-                    final storage = new FlutterSecureStorage();
-                    await storage.deleteAll();
-                  })
+              Center(
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 30),
+                  child: ButtonWidget(
+                    text: "CLEAN STORAGE",
+                    onPressed: () async {
+                      firestore.clearPersistence();
+
+                      showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: Text("Borrada"),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),

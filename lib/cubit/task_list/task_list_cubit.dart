@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/task.dart';
-import '../../screens/task_list_screen/constants/task_options_constants.dart';
-import '../../services/task_service.dart';
+import 'package:firebase_testv2/models/task.dart';
+import 'package:firebase_testv2/screens/task_list_screen/constants/task_options_constants.dart';
+import 'package:firebase_testv2/services/task_service.dart';
+
 part 'task_list_state.dart';
 
 class TaskListCubit extends Cubit<TaskListState> {
@@ -65,5 +66,9 @@ class TaskListCubit extends Cubit<TaskListState> {
       return filter['filter'](task);
     }).toList();
     return filteredTasks;
+  }
+
+  void cleanTasks() {
+    this.state.tasksById = new Map<String, Task>();
   }
 }

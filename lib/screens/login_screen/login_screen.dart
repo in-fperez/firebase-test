@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:firebase_testv2/screens/login_screen/widgets/login_inputs_widget.dart';
 import 'package:firebase_testv2/screens/login_screen/widgets/login_submit_button_widget.dart';
 import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
 import 'package:firebase_testv2/screens/task_list_screen/task_list_screen.dart';
 import 'package:firebase_testv2/screens/widgets/app_layout/app_layout_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/cubit/context/context_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -61,9 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       password: password,
                       context: context,
                     );
-                    Navigator.of(context).pushNamed(
-                      TaskListScreen.routeName,
-                    );
+                    Navigator.of(context)
+                        .pushNamed(ProductsListScreen.routeName);
                   },
                 ),
               ],

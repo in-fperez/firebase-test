@@ -15,14 +15,9 @@ class InternetCubit extends Cubit<InternetState> {
         super(InternetLoading()) {
     connectivityStreamSubscription =
         connectivity.onConnectivityChanged.listen((connectivityResult) async {
-      final result = await InternetAddress.lookup("google.com");
-      if (connectivityResult == ConnectivityResult.wifi &&
-          result.isNotEmpty &&
-          result[0].rawAddress.isNotEmpty) {
+      if (connectivityResult == ConnectivityResult.wifi) {
         emitInternetConnected(ConnectionType.wifi);
-      } else if (connectivityResult == ConnectivityResult.mobile &&
-          result.isNotEmpty &&
-          result[0].rawAddress.isNotEmpty) {
+      } else if (connectivityResult == ConnectivityResult.mobile) {
         emitInternetConnected(ConnectionType.mobile);
       } else if (connectivityResult == ConnectivityResult.none) {
         emitInternetDisconnected();

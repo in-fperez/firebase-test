@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../widgets/input_text/input_text_widget.dart';
+import 'package:firebase_testv2/screens/widgets/input_text/input_text_widget.dart';
 
 class LoginInputsWidget extends StatelessWidget {
   final TextEditingController emailTextController;

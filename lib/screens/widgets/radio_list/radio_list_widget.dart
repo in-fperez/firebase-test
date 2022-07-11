@@ -1,27 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Setting {
+class Option {
   final String name;
-  final void Function(String? settingName) onChanged;
-  Setting({
+  final void Function(String? optionName) onChanged;
+  Option({
     required this.name,
     required this.onChanged,
   });
 }
 
-class SettingsListWidget extends StatefulWidget {
-  final List<Setting> settings;
+class OptionsListWidget extends StatefulWidget {
+  final List<Option> options;
   final String defaultSelected;
-  const SettingsListWidget(
-      {Key? key, required this.settings, required this.defaultSelected})
+  const OptionsListWidget(
+      {Key? key, required this.options, required this.defaultSelected})
       : super(key: key);
 
   @override
-  State<SettingsListWidget> createState() => _SettingsListWidgetState();
+  State<OptionsListWidget> createState() => _OptionsListWidgetState();
 }
 
-class _SettingsListWidgetState extends State<SettingsListWidget> {
+class _OptionsListWidgetState extends State<OptionsListWidget> {
   late String currentSelected = widget.defaultSelected;
   @override
   Widget build(BuildContext context) {
@@ -34,12 +34,12 @@ class _SettingsListWidgetState extends State<SettingsListWidget> {
   }
 
   List<Widget> getList() {
-    return widget.settings.map(
-      (setting) {
+    return widget.options.map(
+      (option) {
         return ListTile(
-          title: Text(setting.name),
+          title: Text(option.name),
           leading: Radio(
-            value: setting.name,
+            value: option.name,
             onChanged: (dynamic a) {
               setState(
                 () {

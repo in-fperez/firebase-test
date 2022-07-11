@@ -1,4 +1,4 @@
-import '../../../models/product.dart';
+import 'package:firebase_testv2/models/product.dart';
 
 List<Map<String, dynamic>> productOrderingOptions = [
   {

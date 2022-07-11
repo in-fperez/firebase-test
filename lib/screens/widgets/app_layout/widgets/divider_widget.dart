@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/constants.dart';
+import 'package:firebase_testv2/constants/constants.dart';
 
 class DividerWidget extends StatelessWidget {
   const DividerWidget({Key? key}) : super(key: key);

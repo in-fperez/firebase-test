@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/constants.dart';
+import 'package:firebase_testv2/constants/constants.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;

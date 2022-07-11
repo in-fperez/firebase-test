@@ -1,6 +1,3 @@
-import 'package:firebase_testv2/models/vertical.dart';
-import 'package:firebase_testv2/models/warehouse.dart';
-
 class User {
   final String id;
   final String email;

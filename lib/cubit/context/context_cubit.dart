@@ -1,12 +1,14 @@
+import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/user.dart';
-import '../../models/vertical.dart';
-import '../../models/warehouse.dart';
-import '../../router/navigate.dart';
-import '../../screens/login_screen/login_screen.dart';
-import '../../screens/task_list_screen/task_list_screen.dart';
-import '../../services/auth_service.dart';
+
+import 'package:firebase_testv2/models/user.dart';
+import 'package:firebase_testv2/models/vertical.dart';
+import 'package:firebase_testv2/models/warehouse.dart';
+import 'package:firebase_testv2/router/navigate.dart';
+import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
+import 'package:firebase_testv2/screens/task_list_screen/task_list_screen.dart';
+import 'package:firebase_testv2/services/auth_service.dart';
 
 part 'context_state.dart';
 
@@ -28,10 +30,6 @@ class ContextCubit extends Cubit<ContextState> {
     emit(this.state.copyWith(currentWarehouse: warehouse));
   }
 
-  void updateThemeMode(bool? mode) {
-    emit(this.state.copyWith(darkMode: mode));
-  }
-
   Future<void> login({
     required String email,
     required String password,
@@ -39,7 +37,7 @@ class ContextCubit extends Cubit<ContextState> {
   }) async {
     AuthService.login(email, password).then((user) {
       emit(this.state.copyWith(user: user));
-      navigate(context, TaskListScreen.routeName);
+      navigate(context, ProductsListScreen.routeName);
     });
   }
 }

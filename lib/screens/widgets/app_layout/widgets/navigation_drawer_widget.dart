@@ -1,11 +1,11 @@
-import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
-import 'package:firebase_testv2/screens/options_screen/settings_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/constants.dart';
-import '../../../../cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/screens/options_screen/settings_screen.dart';
+import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
+import 'package:firebase_testv2/cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/constants/constants.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final bool shouldBeLogged;

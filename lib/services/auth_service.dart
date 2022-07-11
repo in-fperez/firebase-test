@@ -1,6 +1,7 @@
-import '../firestore/firebase_auth_instance.dart';
-import '../models/user.dart';
 import 'bff_base_service.dart';
+
+import 'package:firebase_testv2/firestore/firebase_auth_instance.dart';
+import 'package:firebase_testv2/models/user.dart';
 
 class AuthService {
   static Future<User> login(String email, String password) async {

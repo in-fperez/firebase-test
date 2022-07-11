@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/product.dart';
-import '../../screens/product_list_screen/constants/product_options_constants.dart';
-import '../../services/product_service.dart';
+import 'package:firebase_testv2/models/product.dart';
+import 'package:firebase_testv2/screens/product_list_screen/constants/product_options_constants.dart';
+import 'package:firebase_testv2/services/product_service.dart';
+
 part 'product_list_state.dart';
 
 class ProductListCubit extends Cubit<ProductListState> {
