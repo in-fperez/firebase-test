@@ -1,8 +1,10 @@
-import 'package:firebase_testv2/screens/product_list_screen/widgets/product_card_widget.dart';
-import 'package:firebase_testv2/screens/product_list_screen/widgets/product_list_element.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../../models/product.dart';
+import 'package:firebase_testv2/screens/widgets/card/collapsed_card_widget.dart';
+import 'package:firebase_testv2/screens/widgets/card/card_widget.dart';
+import 'package:firebase_testv2/screens/widgets/list_view/list_view_widget.dart';
+import 'package:firebase_testv2/models/product.dart';
 
 class ProductListWidget extends StatelessWidget {
   final bool isCard;
@@ -13,17 +15,16 @@ class ProductListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        if (isCard) {
-          return ProductCardWidget(
-            product: this.products[index],
-          );
-        } else {
-          return ProductListElement(product: this.products[index]);
-        }
+    return ListViewWidget(
+      items: this.products,
+      cardBuilder: (Product product) {
+        return GestureDetector(
+          onTap: () {},
+          child: isCard
+              ? CardWidget(product: product)
+              : CollapsedCardWidget(product: product),
+        );
       },
-      itemCount: this.products.length,
     );
   }
 }

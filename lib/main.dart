@@ -1,13 +1,12 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:firebase_testv2/cubit/internet/internet_cubit.dart';
-import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
-import 'package:firebase_testv2/theme/themes.dart';
+import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'router/app_router.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:firebase_testv2/cubit/product_list/product_list_cubit.dart';
+import 'package:firebase_testv2/router/app_router.dart';
+import 'package:firebase_testv2/firebase_options.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,27 +14,34 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(IcemanApp(connectivity: Connectivity()));
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ProductListCubit()),
+      ],
+      child: IcemanApp(),
+    ),
+  );
 }
 
 class IcemanApp extends StatelessWidget {
-  final Connectivity connectivity;
   final AppRouter appRouter = AppRouter();
-  IcemanApp({Key? key, required this.connectivity}) : super(key: key);
+  IcemanApp({Key? key}) : super(key: key);
+      productListCubit.initListener();
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => InternetCubit(connectivity: connectivity),
-      child: MaterialApp(
-        title: 'Iceman App',
-        debugShowCheckedModeBanner: false,
-        theme: Themes.getLight(),
-        darkTheme: Themes.getDark(),
-        themeMode: ThemeMode.dark,
-        initialRoute: LoginScreen.routeName,
-        onGenerateRoute: this.appRouter.onGenerateRoute,
-      ),
+
+        var productListCubit = BlocProvider.of<ProductListCubit>(context);
+    productListCubit.initListener();
+
+    
+    return MaterialApp(
+      title: 'Iceman App',
+      debugShowCheckedModeBanner: false,
+      initialRoute: ProductsListScreen.routeName,
+      onGenerateRoute: this.appRouter.onGenerateRoute,
     );
   }
 }

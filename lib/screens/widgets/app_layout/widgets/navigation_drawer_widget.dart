@@ -1,11 +1,7 @@
-import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
-import 'package:firebase_testv2/screens/options_screen/settings_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/constants.dart';
-import '../../../../cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/constants/constants.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final bool shouldBeLogged;
@@ -26,14 +22,11 @@ class NavigationDrawerWidget extends StatelessWidget {
   }
 
   List<Widget> getDrawerListChildren(BuildContext context) {
-    var contextCubit = BlocProvider.of<ContextCubit>(context);
     List<Widget> widgets = [
       ListTile(
         leading: Icon(Icons.settings),
         title: Text('Settings'),
-        onTap: () {
-          Navigator.of(context).pushNamed(SettingsScreen.routeName);
-        },
+        onTap: () {},
       ),
     ];
     if (this.shouldBeLogged) {
@@ -42,9 +35,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.logout),
           title: Text('Log Out'),
-          onTap: () {
-            Navigator.of(context).pushNamed(LoginScreen.routeName);
-          },
+          onTap: () {},
         ),
       ];
     }

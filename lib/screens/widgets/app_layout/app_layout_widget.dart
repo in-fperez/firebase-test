@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_testv2/screens/widgets/app_layout/widgets/appbar_widget.dart';
+
 import 'package:firebase_testv2/screens/widgets/app_layout/widgets/bottom_navigation_bar_widget.dart';
 import 'package:firebase_testv2/screens/widgets/app_layout/widgets/navigation_drawer_widget.dart';
+import 'package:firebase_testv2/screens/widgets/app_layout/widgets/appbar_widget.dart';
 
 class AppLayoutWidget extends StatelessWidget {
   final String title;

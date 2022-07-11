@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/product.dart';
-import '../../screens/product_list_screen/constants/product_options_constants.dart';
-import '../../services/product_service.dart';
+import 'package:firebase_testv2/models/product.dart';
+import 'package:firebase_testv2/screens/product_list_screen/constants/product_options_constants.dart';
+import 'package:firebase_testv2/services/product_service.dart';
+
 part 'product_list_state.dart';
 
 class ProductListCubit extends Cubit<ProductListState> {
@@ -40,7 +41,7 @@ class ProductListCubit extends Cubit<ProductListState> {
     );
   }
 
-  void initListener() {
+  Future<void> initListener() async {
     ProductService.initProductSnapshotsListener(
       (products, addedProducts, modifiedProducts, removedProductIds) {
         var newProductsById = this.state.productsById;
@@ -51,6 +52,7 @@ class ProductListCubit extends Cubit<ProductListState> {
         for (var productId in removedProductIds) {
           newProductsById.remove(productId);
         }
+        print(newProductsById);
         emit(this.state.copyWith(productsById: newProductsById));
       },
     );
