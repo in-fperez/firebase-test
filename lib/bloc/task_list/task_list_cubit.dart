@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:firebase_testv2/models/task.dart';
 import 'package:firebase_testv2/screens/task_list_screen/constants/task_options_constants.dart';
 import 'package:firebase_testv2/services/task_service.dart';
@@ -56,6 +55,7 @@ class TaskListCubit extends Cubit<TaskListState> {
   }
 
   List<Task> getTasks() {
+    print(this.state.tasksById);
     var tasks = this.state.tasksById.values.toList();
     var filter = this.state.filter;
     var ordering = this.state.ordering;
@@ -66,9 +66,5 @@ class TaskListCubit extends Cubit<TaskListState> {
       return filter['filter'](task);
     }).toList();
     return filteredTasks;
-  }
-
-  void cleanTasks() {
-    this.state.tasksById = new Map<String, Task>();
   }
 }

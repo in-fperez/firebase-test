@@ -8,10 +8,8 @@ import 'package:firebase_testv2/screens/task_details/task_details_screen.dart';
 import 'package:firebase_testv2/models/task.dart';
 
 class TaskListWidget extends StatelessWidget {
-  final bool isCard;
   final List<Task> tasks;
-  const TaskListWidget({Key? key, required this.tasks, required this.isCard})
-      : super(key: key);
+  const TaskListWidget({Key? key, required this.tasks}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +25,7 @@ class TaskListWidget extends StatelessWidget {
                 ),
               );
             },
-            child: isCard
-                ? CardWidget(task: task)
-                : CollapsedCardWidget(task: task));
+            child: CardWidget(task: task));
       },
     );
   }

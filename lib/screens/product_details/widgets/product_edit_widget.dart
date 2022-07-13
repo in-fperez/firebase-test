@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:firebase_testv2/constants/constants.dart';
-import 'package:firebase_testv2/cubit/product_edit/product_edit_cubit.dart';
+import 'package:firebase_testv2/bloc/product_edit/product_edit_cubit.dart';
 import 'package:firebase_testv2/models/palet.dart';
 import 'package:firebase_testv2/models/reference.dart';
 import 'package:firebase_testv2/screens/login_screen/login_screen.dart';

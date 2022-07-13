@@ -15,11 +15,7 @@ class AuthService {
     );
     var data = await BffBaseService.Post(dto);
     var firebaseToken = data['firebaseToken'];
-    // await firebaseAuth.signInWithCustomToken(firebaseToken); TODO: ver por que salta un error de custom token format is incorrect
-    await firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    await firebaseAuth.signInWithCustomToken(firebaseToken);
     return User.fromJson(
       data['session'],
       data['sessionToken'],

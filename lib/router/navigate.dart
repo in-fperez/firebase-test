@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:firebase_testv2/screens/product_details/product_details_screen.dart';
 import 'package:firebase_testv2/screens/product_list_screen/product_list_screen.dart';
-import 'package:firebase_testv2/cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/bloc/context/context_cubit.dart';
 import 'package:firebase_testv2/screens/task_list_screen/task_list_screen.dart';
 
 const Map<String, bool> protectedRoutes = {

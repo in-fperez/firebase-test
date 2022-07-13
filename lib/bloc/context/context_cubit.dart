@@ -35,9 +35,8 @@ class ContextCubit extends Cubit<ContextState> {
     required String password,
     required BuildContext context,
   }) async {
-    AuthService.login(email, password).then((user) {
-      emit(this.state.copyWith(user: user));
-      navigate(context, ProductsListScreen.routeName);
-    });
+    var user = await AuthService.login(email, password);
+    emit(this.state.copyWith(user: user));
+    navigate(context, ProductsListScreen.routeName);
   }
 }

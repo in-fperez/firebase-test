@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_testv2/screens/widgets/expansion_panel/expansion_panel_widget.dart';
 import 'package:firebase_testv2/screens/widgets/details_header/details_header.dart';
 import 'package:firebase_testv2/screens/widgets/app_layout/app_layout_widget.dart';
-import 'package:firebase_testv2/cubit/product_details/product_details_cubit.dart';
+import 'package:firebase_testv2/bloc/product_details/product_details_cubit.dart';
 import 'package:firebase_testv2/screens/widgets/tab_bar/tab_bar_widget.dart';
 import 'package:firebase_testv2/models/product.dart';
 

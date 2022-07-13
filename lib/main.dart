@@ -4,22 +4,22 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:firebase_testv2/cubit/product_details/product_details_cubit.dart';
-import 'package:firebase_testv2/cubit/task_details/task_details_cubit.dart';
-import 'package:firebase_testv2/cubit/product_list/product_list_cubit.dart';
+import 'package:firebase_testv2/bloc/product_details/product_details_cubit.dart';
+import 'package:firebase_testv2/bloc/task_details/task_details_cubit.dart';
+import 'package:firebase_testv2/bloc/product_list/product_list_cubit.dart';
 import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
-import 'package:firebase_testv2/cubit/task_list/task_list_cubit.dart';
-import 'package:firebase_testv2/cubit/internet/internet_cubit.dart';
-import 'package:firebase_testv2/cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/bloc/task_list/task_list_cubit.dart';
+import 'package:firebase_testv2/bloc/internet/internet_cubit.dart';
+import 'package:firebase_testv2/bloc/context/context_cubit.dart';
 import 'package:firebase_testv2/config/shared_preferences.dart';
-import 'package:firebase_testv2/cubit/theme/theme_cubit.dart';
+import 'package:firebase_testv2/bloc/theme/theme_cubit.dart';
 import 'package:firebase_testv2/router/app_router.dart';
 import 'package:firebase_testv2/firebase_options.dart';
 import 'package:firebase_testv2/theme/themes.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

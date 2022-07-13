@@ -1,4 +1,4 @@
-import 'package:firebase_testv2/cubit/theme/theme_cubit.dart';
+import 'package:firebase_testv2/bloc/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +8,7 @@ import 'package:firebase_testv2/screens/widgets/app_layout/widgets/divider_widge
 import 'package:firebase_testv2/screens/widgets/radio_list/radio_list_widget.dart';
 import 'package:firebase_testv2/screens/options_screen/widgets/settings_title_widget.dart';
 import 'package:firebase_testv2/constants/constants.dart';
-import 'package:firebase_testv2/cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/bloc/context/context_cubit.dart';
 import 'package:firebase_testv2/models/vertical.dart';
 import 'package:firebase_testv2/models/warehouse.dart';
 import 'package:firebase_testv2/screens/widgets/app_layout/app_layout_widget.dart';

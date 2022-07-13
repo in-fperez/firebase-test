@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_testv2/screens/options_screen/settings_screen.dart';
 import 'package:firebase_testv2/screens/login_screen/login_screen.dart';
-import 'package:firebase_testv2/cubit/context/context_cubit.dart';
+import 'package:firebase_testv2/bloc/context/context_cubit.dart';
 import 'package:firebase_testv2/constants/constants.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {

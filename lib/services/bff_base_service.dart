@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class MsCommunicationDto {
@@ -14,7 +15,7 @@ class MsCommunicationDto {
 }
 
 class BffBaseService {
-  static const String _baseUrl = 'http://10.3.20.156:5002/api/thor-bff/';
+  static const String _baseUrl = 'http://10.3.20.156:5002/api/hulk-bff/';
 
   static dynamic Get(MsCommunicationDto dto) {
     var path = dto.path;
