@@ -1,12 +1,12 @@
+import 'package:firebase_testv2/screens/camera_screen.dart';
 import 'package:firebase_testv2/services/firestore.dart';
 import 'package:firebase_testv2/services/models.dart';
 import 'package:firebase_testv2/widgets/bottomsheet_widget.dart';
 import 'package:firebase_testv2/widgets/button_widget.dart';
+import 'package:firebase_testv2/widgets/custom_page_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
 class ProductForm extends StatefulWidget {
   @override
@@ -24,14 +24,14 @@ class _ProductFormState extends State<ProductForm> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Añadir Producto'),
+          title: const Text('Añadir Producto'),
           backgroundColor: Colors.pinkAccent,
         ),
         body: Form(
           key: formKey,
           //autovalidateMode: AutovalidateMode.onUserInteraction,
           child: ListView(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             children: [
               buildName(),
               const SizedBox(height: 5),
@@ -48,7 +48,7 @@ class _ProductFormState extends State<ProductForm> {
       );
 
   Widget buildPrice() => TextFormField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Precio',
           border: OutlineInputBorder(),
         ),
@@ -64,7 +64,7 @@ class _ProductFormState extends State<ProductForm> {
       );
 
   Widget buildEmail() => TextFormField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Descripción',
           border: OutlineInputBorder(),
         ),
@@ -81,7 +81,7 @@ class _ProductFormState extends State<ProductForm> {
       );
 
   Widget buildName() => TextFormField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Nombre',
           border: OutlineInputBorder(),
         ),
@@ -98,14 +98,15 @@ class _ProductFormState extends State<ProductForm> {
       );
   Widget buildImage() => Center(
         child: GestureDetector(
-          child: FaIcon(FontAwesomeIcons.upload),
+          child: const FaIcon(FontAwesomeIcons.upload),
           onTap: () {
             showModalBottomSheet(
               context: context,
               builder: ((builder) => bottomSheet(
-                  context,
-                  () => takePhoto(ImageSource.camera),
-                  () => takePhoto(ImageSource.gallery))),
+                    context,
+                    () => takePhoto(),
+                    () => takePhotoFromGallery(ImageSource.gallery),
+                  )),
             );
           },
         ),
@@ -115,8 +116,7 @@ class _ProductFormState extends State<ProductForm> {
         builder: (context) => ButtonWidget(
           text: 'Submit',
           onClicked: () async {
-            final isValid = formKey.currentState!
-                .validate(); // FocusScope.of(context).unfocus();
+            final isValid = formKey.currentState!.validate(); // FocusScope.of(context).unfocus();
 
             if (isValid) {
               formKey.currentState!.save();
@@ -131,8 +131,8 @@ class _ProductFormState extends State<ProductForm> {
               } catch (e) {
                 print(e);
               }
-              final message = 'Producto Añadido';
-              final snackBar = SnackBar(
+              const message = 'Producto Añadido';
+              const snackBar = SnackBar(
                 content: Text(
                   message,
                   style: TextStyle(fontSize: 20),
@@ -144,12 +144,11 @@ class _ProductFormState extends State<ProductForm> {
           },
         ),
       );
-  void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.pickImage(
-      source: source,
-    );
-    setState(() {
-      _imageFile = pickedFile;
-    });
+  void takePhoto() async {
+    Navigator.push(context, CustomPageRoute(child: const CameraScreen()));
+  }
+
+  void takePhotoFromGallery(ImageSource source) async {
+    final List<XFile>? pickedFile = await _picker.pickMultiImage();
   }
 }

@@ -16,12 +16,11 @@ class FirestoreService {
 
   Stream<List<Product>> streamProduct() {
     var ref = _db.collection('products');
-    return ref.snapshots().map((perole) =>
-        perole.docs.map((doc) => Product.fromJson(doc.data())).toList());
+    return ref.snapshots().map((perole) => perole.docs.map((doc) => Product.fromJson(doc.data())).toList());
   }
 
   Future<Uint8List?> getProductImages(String namePath) async {
-    final imageRef = storageRef.child('images/${namePath}');
+    final imageRef = storageRef.child('images/$namePath');
     try {
       const oneMegabyte = 2024 * 1024;
       final Uint8List? data = await imageRef.getData(oneMegabyte);
@@ -29,6 +28,7 @@ class FirestoreService {
     } on FirebaseException catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<void> uploadProduct(Product productToUpload) async {
@@ -61,24 +61,22 @@ class FirestoreService {
 
   Future<bool> downloadImages() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    print('hola soy perole el mas perole');
     if (connectivityResult == ConnectivityResult.none) {
       return false;
     }
     try {
-      final imagesList = await listAllImages();
+      final imagesList = await getTotalImagesToDownload();
+      cubit.updateCalculatingImagesToDownload();
       final appDir = await getApplicationDocumentsDirectory();
       await Directory('${appDir.path}/images/').create(recursive: true);
-      for (var image in imagesList.items) {
-        final imagesRef = storageRef.child("images/${image.name}");
-        final file = File('${appDir.path}/${image.fullPath}');
-        if (File('${appDir.path}/${image.name}').existsSync()) {
-          continue;
-        }
-        imagesRef.writeToFile(file);
+      for (var image in imagesList) {
+        final imagesRef = storageRef.child(image);
+        final file = File('${appDir.path}/$image');
+        await imagesRef.writeToFile(file);
         cubit.updateCount();
+        print(cubit.downloadedImages);
+        cubit.updatePercentDownload();
       }
-      cubit.updateDownloadProcess();
       return true;
     } catch (e) {
       print(e);
@@ -86,11 +84,17 @@ class FirestoreService {
     }
   }
 
-  Future<ListResult> listAllImages() async {
+  Future<List<String>> getTotalImagesToDownload() async {
     final imagesRef = storageRef.child('images');
+    final appDir = await getApplicationDocumentsDirectory();
     final listRef = await imagesRef.listAll();
-    print('El meu length es de ${listRef.items.length}');
-    cubit.totalImages = listRef.items.length + 1;
-    return listRef;
+    List<String> imagesToDownload = [];
+    for (var image in listRef.items) {
+      if (await File('${appDir.path}/${image.fullPath}').exists() == false) {
+        cubit.totalImages++;
+        imagesToDownload.add(image.fullPath);
+      }
+    }
+    return imagesToDownload;
   }
 }

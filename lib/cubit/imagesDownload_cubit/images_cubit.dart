@@ -8,6 +8,8 @@ class ImagesCubit extends Cubit<ImagesState> {
   int downloadedImages = 0;
   int totalImages = 0;
   bool isDownloadFinished = false;
+  bool isCalculatingImagesToDownload = true;
+  double percentDownload = 0;
 
   set total(int total) => totalImages = total;
 
@@ -18,6 +20,19 @@ class ImagesCubit extends Cubit<ImagesState> {
 
   void updateDownloadProcess() {
     isDownloadFinished = true;
+    emit(ImageChange());
+  }
+
+  void updateCalculatingImagesToDownload() {
+    isCalculatingImagesToDownload = false;
+    emit(ImageChange());
+  }
+
+  void updatePercentDownload() {
+    if (downloadedImages == totalImages) {
+      percentDownload = 1;
+    }
+    percentDownload = downloadedImages / totalImages;
     emit(ImageChange());
   }
 }

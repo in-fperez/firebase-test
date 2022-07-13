@@ -1,5 +1,7 @@
-import 'package:firebase_testv2/cubit/images_cubit.dart';
+import 'package:firebase_testv2/cubit/imagesDownload_cubit/images_cubit.dart';
 import 'package:firebase_testv2/main.dart';
+import 'package:firebase_testv2/widgets/custom_page_route.dart';
+import 'package:firebase_testv2/widgets/imageProgressIndicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,13 +24,13 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var downloadState = Provider.of<ImagesCubit>(context, listen: true);
-    Color colorTopModalSheet =
-        cubit.isDownloadFinished ? Colors.green : Colors.red;
+    Color colorTopModalSheet = cubit.isDownloadFinished ? Colors.green : Colors.red;
+    double perolePercent = 0.0;
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Login Page"),
+        title: const Text("Login Page"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -40,42 +42,17 @@ class LoginForm extends StatelessWidget {
               height: 70,
               width: MediaQuery.of(context).size.width,
               child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        cubit.isDownloadFinished
-                            ? const Text('')
-                            : const CircularProgressIndicator(
-                                color: Colors.green,
-                              ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${downloadState.downloadedImages.toString()}/${downloadState.totalImages.toString()} Images downloaded',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 19,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                child: cubit.isCalculatingImagesToDownload
+                    ? const CircularProgressIndicator(
+                        color: Colors.green,
+                      )
+                    : const ImageDownloadProgressIndicator(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Padding(
+            const Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
@@ -85,24 +62,20 @@ class LoginForm extends StatelessWidget {
                     hintText: 'Enter valid email id as abc@gmail.com'),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+            const Padding(
+              padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 obscureText: true,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
+                    border: OutlineInputBorder(), labelText: 'Password', hintText: 'Enter secure password'),
               ),
             ),
             FlatButton(
               onPressed: () {
                 //TODO FORGOT PASSWORD SCREEN GOES HERE
-                downloadState.updateCount();
               },
-              child: Text(
+              child: const Text(
                 'Forgot Password',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
               ),
@@ -110,25 +83,21 @@ class LoginForm extends StatelessWidget {
             Container(
               height: 50,
               width: 250,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: FlatButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const ProductCardList()));
+                  Navigator.push(context, CustomPageRoute(child: const ProductCardList()));
                 },
-                child: Text(
+                child: const Text(
                   'Login',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 130,
             ),
-            Text('New User? Create Account')
+            const Text('New User? Create Account')
           ],
         ),
       ),

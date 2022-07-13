@@ -35,6 +35,10 @@ dependencies:
   sn_progress_dialog: ^1.0.8
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
+  percent_indicator: ^4.2.2
+  camera: ^0.9.8+1
+  animations: ^2.0.3
+  video_player: ^2.4.5
 
 dev_dependencies:
   flutter_test:
