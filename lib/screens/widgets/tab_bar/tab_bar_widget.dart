@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_testv2/constants/constants.dart';
-
 class TabBarWidget extends StatelessWidget {
   final List<String> tabBarElements;
   final TabController tabController;
@@ -16,12 +14,11 @@ class TabBarWidget extends StatelessWidget {
     return TabBar(
       tabs: this.getList(),
       controller: tabController,
-      labelColor: ColorConstants.accentColor,
-      indicatorColor: ColorConstants.accentColor,
+      labelColor: Theme.of(context).colorScheme.tertiary,
+      indicatorColor: Theme.of(context).colorScheme.tertiary,
       isScrollable: true,
       labelPadding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width / 10),
-      unselectedLabelColor: ColorConstants.ternaryColor,
     );
   }
 

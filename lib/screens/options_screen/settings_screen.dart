@@ -99,14 +99,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         fontSize: 14,
                         letterSpacing: 0.25,
                         decoration: TextDecoration.underline,
-                        color: ColorConstants.ternaryColor,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ),
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(0, 25, 28, 22),
                     child: Switch(
-                      activeColor: ColorConstants.accentColor,
+                      activeColor: Theme.of(context).colorScheme.tertiary,
                       value: themeCubit.state.isDark,
                       onChanged: (bool value) {
                         themeCubit.changeTheme();

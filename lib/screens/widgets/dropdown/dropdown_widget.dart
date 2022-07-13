@@ -29,12 +29,13 @@ class DropdownWidget extends StatelessWidget {
         ),
         child: Container(
           height: 43,
-          decoration: BoxDecoration(color: ColorConstants.secondaryColor),
+          decoration:
+              BoxDecoration(color: Theme.of(context).colorScheme.secondary),
           child: DropdownButtonHideUnderline(
             child: DropdownButton(
               value: this.selected,
               borderRadius: BorderRadius.circular(4),
-              dropdownColor: ColorConstants.secondaryColor,
+              dropdownColor: Theme.of(context).colorScheme.secondary,
               hint: Padding(
                 padding: EdgeInsets.fromLTRB(10, 8.5, 35, 8.5),
                 child: Text(

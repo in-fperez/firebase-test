@@ -14,7 +14,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var productListCubit = BlocProvider.of<ProductListCubit>(context);
     return FloatingActionButton(
-      backgroundColor: ColorConstants.accentColor,
+      backgroundColor: Theme.of(context).colorScheme.tertiary,
       child: Icon(Icons.filter_alt_outlined),
       onPressed: () {
         showDialog(

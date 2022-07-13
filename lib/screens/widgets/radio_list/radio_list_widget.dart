@@ -39,6 +39,7 @@ class _OptionsListWidgetState extends State<OptionsListWidget> {
         return ListTile(
           title: Text(option.name),
           leading: Radio(
+            activeColor: Theme.of(context).colorScheme.tertiary,
             value: option.name,
             onChanged: (dynamic a) {
               setState(

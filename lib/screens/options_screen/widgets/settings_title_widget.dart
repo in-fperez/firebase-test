@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:firebase_testv2/constants/constants.dart';
+import 'package:flutter/material.dart';
 
 class SettingsTitleWidget extends StatelessWidget {
   final String title;
@@ -16,7 +17,7 @@ class SettingsTitleWidget extends StatelessWidget {
           fontWeight: FontWeight.w400,
           fontSize: 16,
           letterSpacing: 0.25,
-          color: ColorConstants.ternaryColor,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),
       ),
     );

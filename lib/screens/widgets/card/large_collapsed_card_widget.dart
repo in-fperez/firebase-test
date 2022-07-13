@@ -39,7 +39,7 @@ class ListElementWidget extends StatelessWidget {
               ),
             ),
             Chip(
-                backgroundColor: ColorConstants.accentColor,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
                 label: Text(this.chipText)),
             Text(
               DateFormat.yMd().format(this.date ?? DateTime.now()),

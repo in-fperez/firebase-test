@@ -61,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       password: password,
                       context: context,
                     );
-                    Navigator.of(context).pushNamed(TaskListScreen.routeName);
+                    Navigator.of(context)
+                        .pushNamed(ProductsListScreen.routeName);
                   },
                 ),
               ],

@@ -62,8 +62,12 @@ class DetailsHeaderWidget extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.fromLTRB(17, 0, 0, 8),
                     child: Chip(
-                      backgroundColor: ColorConstants.accentColor,
-                      label: Text(warehouse.toString()),
+                      backgroundColor: Theme.of(context).colorScheme.tertiary,
+                      label: Text(
+                        warehouse.toString(),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
                     ),
                   ),
                   Row(
@@ -72,28 +76,28 @@ class DetailsHeaderWidget extends StatelessWidget {
                         onPressed: () {},
                         icon: Icon(
                           Icons.local_print_shop_outlined,
-                          color: ColorConstants.accentColor,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
                         icon: Icon(
                           Icons.star_border_outlined,
-                          color: ColorConstants.accentColor,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
                         icon: Icon(
                           Icons.crop_free_rounded,
-                          color: ColorConstants.accentColor,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
                         icon: Icon(
                           Icons.more_vert,
-                          color: ColorConstants.accentColor,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
                     ],

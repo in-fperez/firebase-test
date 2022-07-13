@@ -19,21 +19,19 @@ class InputTextWidget extends StatelessWidget {
         right: Radius.circular(4),
       ),
       child: TextField(
+        cursorColor: Theme.of(context).colorScheme.tertiary,
         controller: textEditingController,
         decoration: InputDecoration(
           enabledBorder: InputBorder.none,
           filled: true,
-          fillColor: Color(0xff2F2F2F),
-          hintStyle: TextStyle(
-              // color: ColorConstants.secondaryColor,
-              ),
+          fillColor: Theme.of(context).colorScheme.surface,
           label: Text(
             this.placeHolder,
             style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 16,
-              letterSpacing: 0.15,
-            ),
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                letterSpacing: 0.15,
+                color: Theme.of(context).colorScheme.onSurface),
           ),
           suffixIcon: this.suffixIcon,
         ),

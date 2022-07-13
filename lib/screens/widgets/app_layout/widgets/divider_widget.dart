@@ -10,7 +10,7 @@ class DividerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Divider(
       height: 1,
-      color: ColorConstants.secondaryColor,
+      color: Theme.of(context).colorScheme.onPrimary,
     );
   }
 }

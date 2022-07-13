@@ -28,8 +28,8 @@ class ProductsListScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    decoration:
-                        BoxDecoration(color: ColorConstants.secondaryColor),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.secondary),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Row(
@@ -38,11 +38,12 @@ class ProductsListScreen extends StatelessWidget {
                           MaterialButton(
                             onPressed: () {},
                             child: Row(
-                              children: const [
+                              children: [
                                 Text(
                                   "Nombre",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 12,
                                     letterSpacing: 0.15,
@@ -55,11 +56,12 @@ class ProductsListScreen extends StatelessWidget {
                           MaterialButton(
                             onPressed: () {},
                             child: Row(
-                              children: const [
+                              children: [
                                 Text(
                                   "Almacén",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 12,
                                     letterSpacing: 0.15,
@@ -72,11 +74,12 @@ class ProductsListScreen extends StatelessWidget {
                           MaterialButton(
                             onPressed: () {},
                             child: Row(
-                              children: const [
+                              children: [
                                 Text(
                                   "Fecha",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 12,
                                     letterSpacing: 0.15,

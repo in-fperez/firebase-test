@@ -172,7 +172,7 @@ class _ProductEditWidgetState extends State<ProductEditWidget> {
                   onPressed: () {},
                   icon: Icon(
                     Icons.add,
-                    color: ColorConstants.accentColor,
+                    color: Theme.of(context).colorScheme.tertiary,
                     size: 19,
                   ),
                 ),
@@ -180,7 +180,7 @@ class _ProductEditWidgetState extends State<ProductEditWidget> {
                   onPressed: () {},
                   icon: Icon(
                     Icons.edit_outlined,
-                    color: ColorConstants.accentColor,
+                    color: Theme.of(context).colorScheme.tertiary,
                     size: 19,
                   ),
                 ),

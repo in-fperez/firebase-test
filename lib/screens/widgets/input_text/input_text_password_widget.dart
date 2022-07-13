@@ -29,9 +29,6 @@ class _InputTextPasswordWidgetState extends State<InputTextPasswordWidget> {
           enabledBorder: InputBorder.none,
           filled: true,
           fillColor: Color(0xff2F2F2F),
-          hintStyle: TextStyle(
-              // color: ColorConstants.secondaryColor,
-              ),
           label: Text(
             'Password',
             style: TextStyle(

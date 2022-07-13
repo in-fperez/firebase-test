@@ -27,7 +27,7 @@ class LargeCardWidget extends StatelessWidget {
         horizontalTitleGap: 15,
         // contentPadding: EdgeInsets.all(0),
         leading: CircleAvatar(
-          backgroundColor: ColorConstants.accentColor,
+          backgroundColor: Theme.of(context).colorScheme.tertiary,
           radius: 20,
           child: Text(
             'A',
@@ -52,7 +52,7 @@ class LargeCardWidget extends StatelessWidget {
               label: Text(
                 this.chipText,
               ),
-              backgroundColor: ColorConstants.accentColor,
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               labelStyle: TextStyle(
                 color: Colors.white,
@@ -68,7 +68,7 @@ class LargeCardWidget extends StatelessWidget {
                     child: Icon(
                       Icons.info_outline,
                       size: 20,
-                      color: ColorConstants.accentColor,
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                   )
                 : Container(),

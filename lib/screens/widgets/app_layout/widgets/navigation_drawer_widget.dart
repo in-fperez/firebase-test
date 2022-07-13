@@ -17,7 +17,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width / 2,
       child: Drawer(
-        backgroundColor: ColorConstants.secondaryColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         child: ListView(
           children: getDrawerListChildren(context),
         ),

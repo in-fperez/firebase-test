@@ -7,29 +7,29 @@ class BottomNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      selectedItemColor: ColorConstants.accentColor,
-      unselectedItemColor: Colors.white,
+      selectedItemColor: Theme.of(context).colorScheme.tertiary,
+      unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
       currentIndex: 0,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.menu_sharp),
           label: "List",
-          backgroundColor: ColorConstants.secondaryColor,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.insert_drive_file_outlined),
           label: "File",
-          backgroundColor: ColorConstants.secondaryColor,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
           label: "Search",
-          backgroundColor: ColorConstants.secondaryColor,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.qr_code_scanner),
           label: "Scan",
-          backgroundColor: ColorConstants.secondaryColor,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
       ],
     );
