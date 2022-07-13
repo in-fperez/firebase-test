@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_testv2/screens/product_list_screen/constants/product_options_constants.dart';
 import 'package:firebase_testv2/screens/widgets/dropdown/dropdown_widget.dart';
 import 'package:firebase_testv2/bloc/product_list/product_list_cubit.dart';
-import 'package:firebase_testv2/constants/constants.dart';
 
 class FloatingActionButtonWidget extends StatelessWidget {
   const FloatingActionButtonWidget({Key? key}) : super(key: key);
